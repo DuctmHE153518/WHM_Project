@@ -1,5 +1,11 @@
-var builder = WebApplication.CreateBuilder(args);
+using ApiWHM.Models;
+using Microsoft.EntityFrameworkCore;
 
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<WhmanagementContext>(
+    opt => opt.UseSqlServer(
+        builder.Configuration.GetConnectionString("WHMConStr"))
+    );
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -7,7 +13,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors();
+
 var app = builder.Build();
+app.UseExceptionHandler("/error");
+app.UseCors(
+    builder =>
+    {
+        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+    }
+    );
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
