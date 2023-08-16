@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:ClientWHM"
         mc:Ignorable="d"
         ResizeMode="NoResize"
+        WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Title="LoginWindow" Height="300" Width="500">
     <Grid Background="LightGoldenrodYellow">

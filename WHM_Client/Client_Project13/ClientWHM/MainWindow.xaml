@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="600" Width="1200">
+        Title="Home Window" Height="600" Width="1200">
     <Grid Background="LightGoldenrodYellow">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -24,6 +24,7 @@
                     <MenuItem Header="LOẠI SẢN PHẨM" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold"/>
                     <MenuItem Header="NHÂN VIÊN" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold"/>
                     <MenuItem Header="NHẬP HÀNG" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold"/>
+                    <MenuItem Header="XUẤT HÀNG" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold"/>
                     <MenuItem Header="HÓA ĐƠN" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold"/>
                     <MenuItem Header="THỐNG KÊ" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold"/>
                     <MenuItem Header="ĐĂNG XUẤT" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold"/>
