@@ -23,8 +23,8 @@
                     </MenuItem>
                     <MenuItem Header="LOẠI SẢN PHẨM" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold"/>
                     <MenuItem Header="NHÂN VIÊN" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold"/>
-                    <MenuItem Header="NHẬP HÀNG" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold"/>
-                    <MenuItem Header="XUẤT HÀNG" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold"/>
+                    <MenuItem Header="NHẬP KHO" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold"/>
+                    <MenuItem Header="XUẤT KHO" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold"/>
                     <MenuItem Header="HÓA ĐƠN" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold"/>
                     <MenuItem Header="THỐNG KÊ" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold"/>
                     <MenuItem Header="ĐĂNG XUẤT" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold"/>

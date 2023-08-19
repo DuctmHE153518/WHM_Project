@@ -1,0 +1,116 @@
+﻿<Window x:Class="ClientWHM.LenHoaDonWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClientWHM"
+                mc:Ignorable="d"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Title="ThemHoaDonWindow" Height="450" Width="800" Loaded="Window_Loaded">
+    <Grid Background="LightGoldenrodYellow">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Margin="5,0,5,0">
+            <Button x:Name="btnTroVe" Content="Trở Về" FontSize="15" FontWeight="Bold" Width="60" Height="25" HorizontalAlignment="Left" Click="btnTroVe_Click"></Button>
+            <Label Content="Lập Hóa Đơn" FontSize="25" FontWeight="Bold" Foreground="Red" HorizontalAlignment="Center"></Label>
+        </Grid>
+        <Grid Grid.Row="1" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel>
+                    <Label Content="Danh Sách Sản Phẩm" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"></Label>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Tìm Kiếm:" FontSize="20" FontWeight="Bold" Margin="0,0,5,0"></Label>
+                        <TextBox x:Name="tbTimKiem" Width="250" FontSize="15" VerticalAlignment="Center" TextChanged="tbTimKiem_TextChanged"></TextBox>
+                    </StackPanel>
+                </StackPanel>
+                <ListView Grid.Row="1" Background="LightGoldenrodYellow" x:Name="lvSanPham">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Mã SP" DisplayMemberBinding="{Binding MaSp}"></GridViewColumn>
+                            <GridViewColumn Header="Tên SP" DisplayMemberBinding="{Binding TenSp}"></GridViewColumn>
+                            <GridViewColumn Header="Đơn Vị" DisplayMemberBinding="{Binding DonVi}"></GridViewColumn>
+                            <GridViewColumn Header="Mô Tả" DisplayMemberBinding="{Binding MoTa}"></GridViewColumn>
+                            <GridViewColumn Header="Loại SP" DisplayMemberBinding="{Binding MaLoaiSpNavigation.TenLoai}"></GridViewColumn>
+                            <GridViewColumn Header="Giá Bán" DisplayMemberBinding="{Binding GiaBan}"></GridViewColumn>
+                            <GridViewColumn Header="SL Tồn" DisplayMemberBinding="{Binding Slton}"></GridViewColumn>
+                            <GridViewColumn Header="Hình Ảnh" DisplayMemberBinding="{Binding HinhAnh}"></GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+            <Grid Grid.Column="1" Margin="5,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Content="Thông Tin Chi Tiết" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"></Label>
+                <Grid Grid.Row="1">
+                    <DockPanel>
+                        <Grid DockPanel.Dock="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Mã SP:" FontSize="15" Width="100"></Label>
+                                    <TextBox x:Name="tbMaSP" Text="{Binding ElementName=lvSanPham, Path=SelectedItem.MaSp, Mode=OneWay}" Width="200" IsReadOnly="True" VerticalAlignment="Center"></TextBox>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Số Lượng:" FontSize="15" Width="100"></Label>
+                                    <TextBox x:Name="tbSoLuong" Width="200" VerticalAlignment="Center"></TextBox>
+                                </StackPanel>
+                            </StackPanel>
+                            <Button x:Name="btnThemGioHang" Grid.Column="1" FontSize="15" FontWeight="Bold" Width="80" Height="80" Click="btnThemGioHang_Click">
+                                <Button.Content>
+                                    <TextBlock Text="Thêm Vào Giỏ Hàng" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
+                                </Button.Content>
+                            </Button>
+                        </Grid>
+                        <Label DockPanel.Dock="Top" Content="Giỏ Hàng" FontSize="15" FontWeight="Bold"></Label>
+                        <ListView x:Name="lvGioHang" Background="LightGoldenrodYellow">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Mã SP" DisplayMemberBinding="{Binding MaSp}"></GridViewColumn>
+                                    <GridViewColumn Header="Số Lượng" DisplayMemberBinding="{Binding SoLuong}"></GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Click="btnDelete_Click">
+                                        <MenuItem.Header>
+                                            <Image Source="/Images/delete.png" Width="30" Height="30" Stretch="Fill"></Image>
+                                        </MenuItem.Header>
+                                    </MenuItem>
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+                        </ListView>
+                    </DockPanel>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Tông Tiền:" FontSize="20" FontWeight="Bold" Foreground="Red"></Label>
+                            <TextBox x:Name="tbTongTien" Width="220" FontSize="20" FontWeight="Bold" Foreground="Red" VerticalAlignment="Center" IsReadOnly="True"></TextBox>
+                            <Label Content="VNĐ" FontSize="20" FontWeight="Bold" Foreground="Red"></Label>
+                        </StackPanel>
+                        <Button x:Name="btnLapHoaDon" Content="Lập Hóa Đơn" FontSize="20" FontWeight="Bold" Foreground="Red" Width="150" Height="40" HorizontalAlignment="Right" Click="btnLapHoaDon_Click"></Button>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,113 @@
+﻿<Window x:Class="ClientWHM.QLHoaDonWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClientWHM"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Title="QLHoaDonWindow" Height="450" Width="800" Loaded="Window_Loaded">
+    <Grid Background="LightGoldenrodYellow">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Margin="5,0,5,0">
+            <Button x:Name="btnTroVe" Content="Trở Về" FontSize="15" FontWeight="Bold" Width="60" Height="25" HorizontalAlignment="Left" Click="btnTroVe_Click"></Button>
+            <Label Content="Quản Lý Hóa Đơn" FontSize="25" FontWeight="Bold" Foreground="Red" HorizontalAlignment="Center"></Label>
+        </Grid>
+        <Grid Grid.Row="1" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel>
+                    <Label Content="Danh Sách Hóa Đơn" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"></Label>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Tìm Kiếm:" FontSize="20" FontWeight="Bold" Margin="0,0,5,0"></Label>
+                        <TextBox x:Name="tbTimKiem" Width="250" FontSize="15" VerticalAlignment="Center" TextChanged="tbTimKiem_TextChanged"></TextBox>
+                    </StackPanel>
+                </StackPanel>
+                <ListView x:Name="lvHoaDon" Grid.Row="1" Background="LightGoldenrodYellow" SelectionChanged="lvHoaDon_SelectionChanged">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Mã HD" DisplayMemberBinding="{Binding MaHd}"></GridViewColumn>
+                            <GridViewColumn Header="Mã NV" DisplayMemberBinding="{Binding MaNv}"></GridViewColumn>
+                            <GridViewColumn Header="Họ Tên KH" DisplayMemberBinding="{Binding HoTenKh}"></GridViewColumn>
+                            <GridViewColumn Header="Địa Chỉ" DisplayMemberBinding="{Binding DiaChi}"></GridViewColumn>
+                            <GridViewColumn Header="SĐT" DisplayMemberBinding="{Binding Sdt}"></GridViewColumn>
+                            <GridViewColumn Header="Ngày Lập" DisplayMemberBinding="{Binding NgayLap}"></GridViewColumn>
+                            <GridViewColumn Header="Tổng Tiền" DisplayMemberBinding="{Binding TongTien}"></GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+            <Grid Grid.Column="1" Margin="5,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Content="Thông Tin Chi Tiết" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"></Label>
+                <Grid Grid.Row="1" Margin="0,0,0,5">
+                    <DockPanel>
+                        <StackPanel DockPanel.Dock="Top">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Mã HĐ:" FontSize="15" Width="100"></Label>
+                                <TextBox x:Name="tbMaHD" Text="{Binding ElementName=lvHoaDon, Path=SelectedItem.MaHd, Mode=OneWay}" Width="200" IsReadOnly="True" VerticalAlignment="Center"></TextBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Mã NV:" FontSize="15" Width="100"></Label>
+                                <TextBox x:Name="tbMaNV" Text="{Binding ElementName=lvHoaDon, Path=SelectedItem.MaNv, Mode=OneWay}" Width="200" IsReadOnly="True" VerticalAlignment="Center"></TextBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Họ Tên KH:" FontSize="15" Width="100"></Label>
+                                <TextBox x:Name="tbHoTenKH" Text="{Binding ElementName=lvHoaDon, Path=SelectedItem.HoTenKh, Mode=OneWay}" Width="200" IsReadOnly="True" VerticalAlignment="Center"></TextBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Địa Chỉ:" FontSize="15" Width="100"></Label>
+                                <TextBox x:Name="tbDiaChi" Text="{Binding ElementName=lvHoaDon, Path=SelectedItem.DiaChi, Mode=OneWay}" Width="200" IsReadOnly="True" VerticalAlignment="Center"></TextBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="SĐT:" FontSize="15" Width="100"></Label>
+                                <TextBox x:Name="tbSDT" Text="{Binding ElementName=lvHoaDon, Path=SelectedItem.Sdt, Mode=OneWay}" Width="200" IsReadOnly="True" VerticalAlignment="Center"></TextBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Ngày Lập:" FontSize="15" Width="100"></Label>
+                                <DatePicker Name="dpNgayLap" SelectedDate="{Binding ElementName=lvHoaDon, Path=SelectedItem.NgayLap, Mode=OneWay}" IsEnabled="False" Width="200" VerticalAlignment="Center"></DatePicker>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Tổng Tiền:" FontSize="15" Width="100"></Label>
+                                <TextBox x:Name="tbTongTien" Text="{Binding ElementName=lvHoaDon, Path=SelectedItem.TongTien, Mode=OneWay}" Width="200" IsReadOnly="True" VerticalAlignment="Center"></TextBox>
+                            </StackPanel>
+                        </StackPanel>
+                        <Label DockPanel.Dock="Top" Content="Danh sách Sản Phẩm Của Hóa Đơn" FontSize="15" FontWeight="Bold"></Label>
+                        <ListView x:Name="lvChiTietHoaDon" Background="LightGoldenrodYellow">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Mã SP" DisplayMemberBinding="{Binding MaSp}"></GridViewColumn>
+                                    <GridViewColumn Header="Số Lượng" DisplayMemberBinding="{Binding SoLuong}"></GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </DockPanel>
+                </Grid>
+                <Grid Grid.Row="2" HorizontalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="btnThem" Content="Thêm" FontSize="20" FontWeight="Bold" Width="100" Margin="0,0,5,0" Click="btnThem_Click"></Button>
+                    <Button x:Name="btnXoa" Grid.Column="1" Content="Xóa" FontSize="20" FontWeight="Bold" Width="100" Click="btnXoa_Click"></Button>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
