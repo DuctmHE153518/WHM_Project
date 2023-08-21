@@ -7,7 +7,7 @@ public partial class Sanpham
 {
     public int MaSp { get; set; }
 
-    public string? TenSp { get; set; }
+    public string TenSp { get; set; } = null!;
 
     public string? DonVi { get; set; }
 
@@ -17,7 +17,7 @@ public partial class Sanpham
 
     public double? GiaBan { get; set; }
 
-    public int? Slton { get; set; }
+    public int? SltonKho { get; set; }
 
     public string? HinhAnh { get; set; }
 

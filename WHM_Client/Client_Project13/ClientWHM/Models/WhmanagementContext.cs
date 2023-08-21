@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -42,7 +41,6 @@ public partial class WhmanagementContext : DbContext
             var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
             optionsBuilder.UseSqlServer(config.GetConnectionString("WHMConStr"));
         }
-
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -119,8 +117,7 @@ public partial class WhmanagementContext : DbContext
             entity.Property(e => e.NgayLap).HasColumnType("date");
             entity.Property(e => e.Sdt)
                 .HasMaxLength(10)
-                .IsFixedLength()
-                .HasColumnName("SDT");
+                .IsFixedLength();
 
             entity.HasOne(d => d.MaNvNavigation).WithMany(p => p.Hoadons)
                 .HasForeignKey(d => d.MaNv)
@@ -156,8 +153,7 @@ public partial class WhmanagementContext : DbContext
             entity.Property(e => e.QueQuan).HasMaxLength(50);
             entity.Property(e => e.Sdt)
                 .HasMaxLength(10)
-                .IsFixedLength()
-                .HasColumnName("SDT");
+                .IsFixedLength();
             entity.Property(e => e.Username)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -190,7 +186,7 @@ public partial class WhmanagementContext : DbContext
                 .IsUnicode(false);
             entity.Property(e => e.MaLoaiSp).HasColumnName("MaLoaiSP");
             entity.Property(e => e.MoTa).HasMaxLength(50);
-            entity.Property(e => e.Slton).HasColumnName("SLTon");
+            entity.Property(e => e.SltonKho).HasColumnName("SLTonKho");
             entity.Property(e => e.TenSp)
                 .HasMaxLength(50)
                 .HasColumnName("TenSP");
