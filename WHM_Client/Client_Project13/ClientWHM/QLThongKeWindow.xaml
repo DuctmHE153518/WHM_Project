@@ -9,14 +9,14 @@
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        Title="ThongKeWindow" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="ThongKeWindow" Height="450" Width="800">
     <Grid Background="LightGoldenrodYellow">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Margin="5,0,5,0">
-            <Button x:Name="btnTroVe" Content="Trở Về" FontSize="15" FontWeight="Bold" Width="60" Height="25" HorizontalAlignment="Left" Click="btnTroVe_Click"></Button>
+            <Button x:Name="btnTroVe" Content="Trở Về" FontSize="15" FontWeight="Bold" Width="60" Height="25" HorizontalAlignment="Left"></Button>
             <Label Content="Thống Kê Doanh Thu" FontSize="25" FontWeight="Bold" Foreground="Red" HorizontalAlignment="Center"></Label>
         </Grid>
         <Grid Grid.Row="1" Margin="5">
@@ -29,7 +29,7 @@
                 <DatePicker DockPanel.Dock="Top" Name="dpTuNgay" FontSize="15" Width="250" HorizontalAlignment="Left"></DatePicker>
                 <Label DockPanel.Dock="Top" Content="Đến Ngày:" FontSize="15" FontWeight="Bold"></Label>
                 <DatePicker DockPanel.Dock="Top" Name="dpDenNgay" FontSize="15" Width="250" HorizontalAlignment="Left"></DatePicker>
-                <Button DockPanel.Dock="Top" x:Name="btnThongKe" Content="Thống Kê" FontSize="20" FontWeight="Bold" Foreground="Red" Width="180" Margin="20" Click="btnThongKe_Click"></Button>
+                <Button DockPanel.Dock="Top" x:Name="btnThongKe" Content="Thống Kê" FontSize="20" FontWeight="Bold" Foreground="Red" Width="180" Margin="20"></Button>
                 <Grid Width="250">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"></RowDefinition>
@@ -40,7 +40,7 @@
                     <StackPanel Grid.Row="1" Orientation="Horizontal">
                         <Label Content="Nhập Top SP:" FontSize="15" FontWeight="Bold"></Label>
                         <TextBox x:Name="tbtop" FontSize="15" Width="80" VerticalAlignment="Center"></TextBox>
-                        <Button x:Name="btnXem" Width="50" Content="Xem" Margin="10,0,0,0" VerticalAlignment="Center" Click="btnXem_Click"></Button>
+                        <Button x:Name="btnXem" Width="50" Content="Xem" Margin="10,0,0,0" VerticalAlignment="Center"></Button>
                     </StackPanel>
                     <ListView Grid.Row="2" x:Name="lvSanPham" Background="LightGoldenrodYellow">
                         <ListView.View>

@@ -8,14 +8,14 @@
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        Title="NhapHangWindow" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="NhapHangWindow" Height="450" Width="800">
     <Grid Background="LightGoldenrodYellow">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Margin="5,0,5,0">
-            <Button x:Name="btnTroVe" Content="Trở Về" FontSize="15" FontWeight="Bold" Width="60" Height="25" HorizontalAlignment="Left" Click="btnTroVe_Click"></Button>
+            <Button x:Name="btnTroVe" Content="Trở Về" FontSize="15" FontWeight="Bold" Width="60" Height="25" HorizontalAlignment="Left"></Button>
             <Label Content="Quản Lý Nhập Kho" FontSize="25" FontWeight="Bold" Foreground="Red" HorizontalAlignment="Center"></Label>
         </Grid>
         <Grid Grid.Row="1" Margin="5">
@@ -32,7 +32,7 @@
                     <Label Content="Danh Sách Sản Phẩm" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"></Label>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Tìm Kiếm:" FontSize="20" FontWeight="Bold" Margin="0,0,5,0"></Label>
-                        <TextBox x:Name="tbTimKiem" Width="250" FontSize="15" VerticalAlignment="Center" TextChanged="tbTimKiem_TextChanged"></TextBox>
+                        <TextBox x:Name="tbTimKiem" Width="250" FontSize="15" VerticalAlignment="Center"></TextBox>
                     </StackPanel>
                 </StackPanel>
                 <ListView x:Name="lvSanPham" Grid.Row="1" Background="LightGoldenrodYellow">
@@ -78,7 +78,7 @@
                                     <TextBox x:Name="tbSLNhap" Width="200" VerticalAlignment="Center"></TextBox>
                                 </StackPanel>
                             </StackPanel>
-                            <Button x:Name="btnThemDSNhap" Grid.Column="1" FontSize="15" FontWeight="Bold" Width="80" Height="80" Click="btnThemDSNhap_Click">
+                            <Button x:Name="btnThemDSNhap" Grid.Column="1" FontSize="15" FontWeight="Bold" Width="80" Height="80">
                                 <Button.Content>
                                     <TextBlock Text="Thêm Vào DS Nhập" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
                                 </Button.Content>
@@ -95,7 +95,7 @@
                             </ListView.View>
                             <ListView.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Click="btnDelete_Click">
+                                    <MenuItem>
                                         <MenuItem.Header>
                                             <Image Source="/Images/delete.png" Width="30" Height="30" Stretch="Fill"></Image>
                                         </MenuItem.Header>
@@ -112,7 +112,7 @@
                             <TextBox x:Name="tbTongTien" Width="220" FontSize="20" FontWeight="Bold" Foreground="Red" VerticalAlignment="Center" IsReadOnly="True"></TextBox>
                             <Label Content="VNĐ" FontSize="20" FontWeight="Bold" Foreground="Red"></Label>
                         </StackPanel>
-                        <Button x:Name="btnNhapHang" Content="Nhập Hàng" FontSize="20" FontWeight="Bold" Foreground="Red" Width="150" Height="40" HorizontalAlignment="Right" Click="btnNhapHang_Click"></Button>
+                        <Button x:Name="btnNhapHang" Content="Nhập Hàng" FontSize="20" FontWeight="Bold" Foreground="Red" Width="150" Height="40" HorizontalAlignment="Right"></Button>
                     </StackPanel>
                 </Grid>
             </Grid>
