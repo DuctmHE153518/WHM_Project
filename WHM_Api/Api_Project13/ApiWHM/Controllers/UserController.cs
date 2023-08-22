@@ -2,6 +2,7 @@
 using ApiWHM.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -27,7 +28,7 @@ namespace ApiWHM.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login([FromBody] LoginRequest request)
+        public IActionResult Login(LoginRequest request)
         {
             string username = request.Username;
             string password = request.Password;
@@ -56,7 +57,91 @@ namespace ApiWHM.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult<Nhanvien> Get(int id)
+        {
+            Nhanvien? nhanvien = _context.Nhanviens.FirstOrDefault(nv => nv.MaNv == id);
+            if (nhanvien is null) return NotFound();
+            else return nhanvien;
+        }
 
+        [HttpPost]
+        public ActionResult<Nhanvien> Search(string text)
+        {
+            List<Nhanvien> nhanvien = _context.Nhanviens.Where(nv => nv.HoTen.Equals(text) && nv.Email.Equals(text) 
+            && nv.Username.Equals(text) && nv.ChucVu.Equals(text)).ToList();
+            if (nhanvien is null) return NotFound();
+            else return Ok(nhanvien);
+        }
+
+        [HttpPost]
+        public IActionResult Add(Nhanvien nv)
+        {
+            try
+            {
+                _context.Nhanviens.Add(nv);
+                int result = _context.SaveChanges();
+                return Ok(nv.MaNv);
+            }
+            catch
+            {
+                return Conflict();
+            }
+        }
+
+        [HttpPut]
+        public IActionResult Edit(Nhanvien nv)
+        {
+            try
+            {
+                Nhanvien nhanvien = _context.Nhanviens.FirstOrDefault(n => n.MaNv == nv.MaNv);
+                if (nhanvien is null)
+                {
+                    return StatusCode(444, "NhanVien is not found");
+                }
+                else
+                {
+                    nhanvien.HoTen = nv.HoTen;
+                    nhanvien.NgaySinh = nv.NgaySinh;
+                    nhanvien.QueQuan = nv.QueQuan;
+                    nhanvien.Sdt = nv.Sdt;
+                    nhanvien.Email = nv.Email;
+                    nhanvien.ChucVu = nv.ChucVu;
+                    nhanvien.Luong = nv.Luong;
+                    nhanvien.Username = nv.Username;
+                    nhanvien.Password = nv.Password;
+                    int result = _context.SaveChanges();
+                    return Ok(result);
+                }
+            }
+            catch
+            {
+                return Conflict();
+            }
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                Nhanvien nhanvien = _context.Nhanviens.FirstOrDefault(nv => nv.MaNv == id);
+                if (nhanvien is null)
+                {
+                    return StatusCode(444, "NhanVien is not found");
+                }
+                else
+                {
+                    _context.Nhanviens.Remove(nhanvien);
+                    int result = _context.SaveChanges();
+                    return Ok(result);
+                }
+            }
+            catch
+            {
+                return Conflict();
+            }
+        }
 
         /*[HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginRequest login)
