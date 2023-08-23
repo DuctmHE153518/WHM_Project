@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClientWHM.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,20 @@ namespace ClientWHM
         public QLNhanVienWindow()
         {
             InitializeComponent();
+            LoadData();
+        }
+
+        private async void LoadData()
+        {
+            try
+            {
+                UserService userService = new UserService();
+                lvNhanVien.ItemsSource = await userService.GetNhanViens();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using ApiWHM.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -36,19 +37,51 @@ namespace ApiWHM.Controllers
             {
                 if (nv.Username == username && nv.Password == password)
                 {
-                    return Ok(new { message = "Đăng nhập thành công!" });
+                    return Ok(new {message = "Login Successful!"});
                 }
             }
-            return Conflict(new { message = "Username hoặc password sai!" });
+            return Conflict(new {message = "Wrong username or password!" });
         }
 
         [HttpPost]
-        public IActionResult Register(Nhanvien nhanvien)
+        public IActionResult Register(RegisterRequest request)
         {
+            string email = request.Email;
+            string username = request.Username;
+            string password = request.Password;
+            string repassword = request.RePassword;
+            foreach (Nhanvien nv in _context.Nhanviens)
+            {
+                if (nv.Email == email)
+                {
+                    return StatusCode(444, "Email already exists!");
+                }
+                else if (nv.Username == username)
+                {
+                    return StatusCode(444, "Username already exists!");
+                }
+                else if (password != repassword)
+                {
+                    return StatusCode(444, "Wrong password!");
+                }
+            }
+
             try
             {
+                Nhanvien nhanvien = new Nhanvien
+                {
+                    HoTen = null,
+                    NgaySinh = null,
+                    QueQuan = null,
+                    Sdt = null,
+                    Email = email,
+                    ChucVu = null,
+                    Luong = null,
+                    Username = username,
+                    Password = password
+                };
                 _context.Nhanviens.Add(nhanvien);
-                int result = _context.SaveChanges();
+                _context.SaveChanges();
                 return Ok(nhanvien.MaNv);
             }
             catch
