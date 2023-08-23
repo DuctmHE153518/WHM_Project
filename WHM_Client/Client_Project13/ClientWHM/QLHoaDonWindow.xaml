@@ -15,7 +15,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Margin="5,0,5,0">
-            <Button x:Name="btnTroVe" Content="Trở Về" FontSize="15" FontWeight="Bold" Width="60" Height="25" HorizontalAlignment="Left"></Button>
+            <Button x:Name="btnTroVe" Content="Trở Về" FontSize="15" FontWeight="Bold" Width="60" Height="25" HorizontalAlignment="Left" Click="btnTroVe_Click"></Button>
             <Label Content="Quản Lý Hóa Đơn" FontSize="25" FontWeight="Bold" Foreground="Red" HorizontalAlignment="Center"></Label>
         </Grid>
         <Grid Grid.Row="1" Margin="5">

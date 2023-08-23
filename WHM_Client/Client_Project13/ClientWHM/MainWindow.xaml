@@ -14,24 +14,36 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Margin="5">
-            <StackPanel>
-                <Menu Height="30">
-                    <MenuItem Header="SẢN PHẨM" BorderBrush="Black" Margin="5,5,5,0" FontWeight="Bold">
-                        <MenuItem Header="new"/>
-                        <Separator/>
-                        <MenuItem Header="new"/>
-                    </MenuItem>
-                    <MenuItem Header="LOẠI SẢN PHẨM" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold"/>
-                    <MenuItem Header="NHÂN VIÊN" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold"/>
-                    <MenuItem Header="NHẬP KHO" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold"/>
-                    <MenuItem Header="XUẤT KHO" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold"/>
-                    <MenuItem Header="HÓA ĐƠN" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold"/>
-                    <MenuItem Header="THỐNG KÊ" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold"/>
-                    <MenuItem Header="ĐĂNG XUẤT" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold"/>
-                </Menu>
-            </StackPanel>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="700"></ColumnDefinition>
+                <ColumnDefinition Width="500"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <StackPanel>
+                    <Menu Height="30">
+                        <MenuItem x:Name="btnSanPham" Header="SẢN PHẨM" BorderBrush="Black" Margin="5,5,5,0" FontWeight="Bold" HorizontalAlignment="Left" Click="btnSanPham_Click" />
+                        <MenuItem x:Name="btnLoSanPham" Header="LOẠI SẢN PHẨM" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold" Click="btnLoSanPham_Click"/>
+                        <MenuItem x:Name="btnNhanVien" Header="NHÂN VIÊN" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold" Click="btnNhanVien_Click"/>
+                        <MenuItem x:Name="btnNhapKho" Header="NHẬP KHO" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold" Click="btnNhapKho_Click"/>
+                        <MenuItem x:Name="btnXuatKho" Header="XUẤT KHO" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold" Click="btnXuatKho_Click"/>
+                        <MenuItem x:Name="btnHoaDon" Header="HÓA ĐƠN" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold" Click="btnHoaDon_Click"/>
+                        <MenuItem x:Name="btnThongKe" Header="THỐNG KÊ" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold" Click="btnThongKe_Click"/>
+
+                    </Menu>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Column="1">
+                <StackPanel>
+                    <Menu Height="30">
+                        <Label Margin="0,1,0,0" BorderBrush="Black" FontWeight="Bold" Content="Username:"/>
+                        <TextBox x:Name="tbShowUsername" Width="300" Height="25" Margin="-10,1,0,0" Background="White" BorderBrush="Black" FontWeight="Bold"/>
+                        <Button x:Name="btnLogout" Height="25" Content="ĐĂNG XUẤT" Margin="5,1,5,0" BorderBrush="Black" FontWeight="Bold" Click="btnLogout_Click"/>
+                    </Menu>
+
+                </StackPanel>
+
+            </Grid>
         </Grid>
-        
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="897*"/>

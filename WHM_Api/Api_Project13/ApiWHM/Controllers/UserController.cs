@@ -37,10 +37,10 @@ namespace ApiWHM.Controllers
             {
                 if (nv.Username == username && nv.Password == password)
                 {
-                    return Ok(new {message = "Login Successful!"});
+                    return Ok(new { message = "Login Successful!" });
                 }
             }
-            return Conflict(new {message = "Wrong username or password!" });
+            return Conflict(new { message = "Wrong username or password!" });
         }
 
         [HttpPost]
@@ -75,8 +75,8 @@ namespace ApiWHM.Controllers
                     QueQuan = null,
                     Sdt = null,
                     Email = email,
-                    ChucVu = null,
-                    Luong = null,
+                    ChucVu = "Staff",
+                    Luong = 200000,
                     Username = username,
                     Password = password
                 };
@@ -90,7 +90,7 @@ namespace ApiWHM.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public ActionResult<Nhanvien> Get(int id)
         {
             Nhanvien? nhanvien = _context.Nhanviens.FirstOrDefault(nv => nv.MaNv == id);
@@ -98,23 +98,23 @@ namespace ApiWHM.Controllers
             else return nhanvien;
         }
 
-        [HttpPost]
+        [HttpGet("{text}")]
         public ActionResult<Nhanvien> Search(string text)
         {
-            List<Nhanvien> nhanvien = _context.Nhanviens.Where(nv => nv.HoTen.Equals(text) && nv.Email.Equals(text) 
-            && nv.Username.Equals(text) && nv.ChucVu.Equals(text)).ToList();
+            List<Nhanvien> nhanvien = _context.Nhanviens.Where(nv => nv.HoTen.Contains(text) || nv.Email.Contains(text)
+            || nv.Username.Contains(text) || nv.ChucVu.Contains(text)).ToList();
             if (nhanvien is null) return NotFound();
             else return Ok(nhanvien);
         }
 
         [HttpPost]
-        public IActionResult Add(Nhanvien nv)
+        public IActionResult Add(Nhanvien nhanvien)
         {
             try
             {
-                _context.Nhanviens.Add(nv);
+                _context.Nhanviens.Add(nhanvien);
                 int result = _context.SaveChanges();
-                return Ok(nv.MaNv);
+                return Ok(nhanvien.MaNv);
             }
             catch
             {
@@ -123,26 +123,27 @@ namespace ApiWHM.Controllers
         }
 
         [HttpPut]
-        public IActionResult Edit(Nhanvien nv)
+        public IActionResult Edit(Nhanvien nhanvien)
         {
             try
             {
-                Nhanvien nhanvien = _context.Nhanviens.FirstOrDefault(n => n.MaNv == nv.MaNv);
-                if (nhanvien is null)
+                Nhanvien nv = _context.Nhanviens.FirstOrDefault(n => n.MaNv == nhanvien.MaNv);
+                if (nv is null)
                 {
                     return StatusCode(444, "NhanVien is not found");
                 }
                 else
                 {
-                    nhanvien.HoTen = nv.HoTen;
-                    nhanvien.NgaySinh = nv.NgaySinh;
-                    nhanvien.QueQuan = nv.QueQuan;
-                    nhanvien.Sdt = nv.Sdt;
-                    nhanvien.Email = nv.Email;
-                    nhanvien.ChucVu = nv.ChucVu;
-                    nhanvien.Luong = nv.Luong;
-                    nhanvien.Username = nv.Username;
-                    nhanvien.Password = nv.Password;
+                    nv.HoTen = nhanvien.HoTen;
+                    nv.NgaySinh = nhanvien.NgaySinh;
+                    nv.QueQuan = nhanvien.QueQuan;
+                    nv.Sdt = nhanvien.Sdt;
+                    nv.Email = nhanvien.Email;
+                    nv.ChucVu = nhanvien.ChucVu;
+                    nv.Luong = nhanvien.Luong;
+                    nv.Username = nhanvien.Username;
+                    nv.Password = nhanvien.Password;
+                    _context.Nhanviens.Update(nv);
                     int result = _context.SaveChanges();
                     return Ok(result);
                 }
@@ -153,7 +154,7 @@ namespace ApiWHM.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             try

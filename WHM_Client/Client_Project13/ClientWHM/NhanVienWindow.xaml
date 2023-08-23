@@ -6,113 +6,60 @@
         xmlns:local="clr-namespace:ClientWHM"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="QLNhanVienWindow" Height="450" Width="800">
-    <Grid Background="LightGoldenrodYellow">
+        Title="NhanVienWindow" Height="450" Width="400">
+    <Grid Background="LightGoldenrodYellow" Margin="5,0,5,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Margin="5,0,5,0">
-            <Button x:Name="btnTroVe" Content="Trở Về" FontSize="15" FontWeight="Bold" Width="60" Height="25" HorizontalAlignment="Left"></Button>
-            <Label Content="Quản Lý Nhân Viên" FontSize="25" FontWeight="Bold" Foreground="Red" HorizontalAlignment="Center"></Label>
+        <Grid>
+            <Label Content="Thông tin nhân viên" FontSize="25" FontWeight="Bold" Foreground="Red" HorizontalAlignment="Center"></Label>
         </Grid>
-        <Grid Grid.Row="1" Margin="5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <StackPanel>
-                    <Label Content="Danh Sách Nhân Viên" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"></Label>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Tìm Kiếm:" FontSize="20" FontWeight="Bold" Margin="0,0,5,0"></Label>
-                        <TextBox x:Name="tbTimKiem" Width="250" FontSize="15" VerticalAlignment="Center"></TextBox>
-                    </StackPanel>
+        <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Mã NV:" FontSize="15" Width="80"></Label>
+                    <TextBox x:Name="tbMaNV" Width="220" IsReadOnly="True" VerticalAlignment="Center"></TextBox>
                 </StackPanel>
-                <ListView x:Name="lvNhanVien" Grid.Row="1" Background="LightGoldenrodYellow">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Mã NV" DisplayMemberBinding="{Binding MaNv}"></GridViewColumn>
-                            <GridViewColumn Header="Họ Tên" DisplayMemberBinding="{Binding HoTen}"></GridViewColumn>
-                            <GridViewColumn Header="Ngày Sinh" DisplayMemberBinding="{Binding NgaySinh}"></GridViewColumn>
-                            <GridViewColumn Header="Quê Quán" DisplayMemberBinding="{Binding QueQuan}"></GridViewColumn>
-                            <GridViewColumn Header="SĐT" DisplayMemberBinding="{Binding Sdt}"></GridViewColumn>
-                            <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"></GridViewColumn>
-                            <GridViewColumn Header="Chức Vụ" DisplayMemberBinding="{Binding ChucVu}"></GridViewColumn>
-                            <GridViewColumn Header="Lương" DisplayMemberBinding="{Binding Luong}"></GridViewColumn>
-                            <GridViewColumn Header="Username" DisplayMemberBinding="{Binding Username}"></GridViewColumn>
-                            <GridViewColumn Header="Password" DisplayMemberBinding="{Binding Password}"></GridViewColumn>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </Grid>
-            <Grid Grid.Column="1" Margin="5,0,0,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Label Content="Thông Tin Chi Tiết" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"></Label>
-                <Grid Grid.Row="1">
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Mã NV:" FontSize="15" Width="80"></Label>
-                            <TextBox x:Name="tbMaNV" Text="{Binding ElementName=lvNhanVien, Path=SelectedItem.MaNv, Mode=OneWay}" Width="220" IsReadOnly="True" VerticalAlignment="Center"></TextBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Họ Tên:" FontSize="15" Width="80"></Label>
-                            <TextBox x:Name="tbHoTen" Text="{Binding ElementName=lvNhanVien, Path=SelectedItem.HoTen, Mode=OneWay}" Width="220" VerticalAlignment="Center"></TextBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Ngày Sinh:" FontSize="15" Width="80"></Label>
-                            <DatePicker Name="dpNgaySinh" SelectedDate="{Binding ElementName=lvNhanVien, Path=SelectedItem.NgaySinh, Mode=OneWay}" Width="220" VerticalAlignment="Center"></DatePicker>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Quê Quán:" FontSize="15" Width="80"></Label>
-                            <TextBox x:Name="tbQueQuan" Text="{Binding ElementName=lvNhanVien, Path=SelectedItem.QueQuan, Mode=OneWay}" Width="220" VerticalAlignment="Center"></TextBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="SĐT:" FontSize="15" Width="80"></Label>
-                            <TextBox x:Name="tbSDT" Text="{Binding ElementName=lvNhanVien, Path=SelectedItem.Sdt, Mode=OneWay}" Width="220" VerticalAlignment="Center"></TextBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Email:" FontSize="15" Width="80"></Label>
-                            <TextBox x:Name="tbEmail" Text="{Binding ElementName=lvNhanVien, Path=SelectedItem.Email, Mode=OneWay}" Width="220" VerticalAlignment="Center"></TextBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Chức Vụ:" FontSize="15" Width="80"></Label>
-                            <TextBox x:Name="tbChucVu" Text="{Binding ElementName=lvNhanVien, Path=SelectedItem.ChucVu, Mode=OneWay}" Width="220" VerticalAlignment="Center"></TextBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Lương:" FontSize="15" Width="80"></Label>
-                            <TextBox x:Name="tbLuong" Text="{Binding ElementName=lvNhanVien, Path=SelectedItem.Luong, Mode=OneWay}" Width="220" VerticalAlignment="Center"></TextBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Username:" FontSize="15" Width="80"></Label>
-                            <TextBox x:Name="tbUsername" Text="{Binding ElementName=lvNhanVien, Path=SelectedItem.Username, Mode=OneWay}" Width="220" VerticalAlignment="Center"></TextBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Password:" FontSize="15" Width="80"></Label>
-                            <TextBox x:Name="tbPassword" Text="{Binding ElementName=lvNhanVien, Path=SelectedItem.Password, Mode=OneWay}" Width="220" VerticalAlignment="Center"></TextBox>
-                        </StackPanel>
-                    </StackPanel>
-                </Grid>
-                <Grid Grid.Row="2" HorizontalAlignment="Center">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Button x:Name="btnThem" Content="Thêm" FontSize="20" FontWeight="Bold" Width="100" Margin="0,0,5,0"></Button>
-                    <Button x:Name="btnXoa" Grid.Column="1" Content="Xóa" FontSize="20" FontWeight="Bold" Width="100" Margin="0,0,5,0"></Button>
-                    <Button x:Name="btnSua" Grid.Column="2" Content="Sửa" FontSize="20" FontWeight="Bold" Width="100"></Button>
-                </Grid>
-            </Grid>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Họ Tên:" FontSize="15" Width="80"></Label>
+                    <TextBox x:Name="tbHoTen" Width="220" VerticalAlignment="Center"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Ngày Sinh:" FontSize="15" Width="80"></Label>
+                    <DatePicker Name="dpNgaySinh" Width="220" VerticalAlignment="Center"></DatePicker>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Quê Quán:" FontSize="15" Width="80"></Label>
+                    <TextBox x:Name="tbQueQuan" Width="220" VerticalAlignment="Center"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="SĐT:" FontSize="15" Width="80"></Label>
+                    <TextBox x:Name="tbSdt" Width="220" VerticalAlignment="Center"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Email:" FontSize="15" Width="80"></Label>
+                    <TextBox x:Name="tbEmail" Width="220" VerticalAlignment="Center"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Chức Vụ:" FontSize="15" Width="80"></Label>
+                    <TextBox x:Name="tbChucVu" Width="220" IsReadOnly="True" VerticalAlignment="Center"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Lương:" FontSize="15" Width="80"></Label>
+                    <TextBox x:Name="tbLuong" Width="220" IsReadOnly="True" VerticalAlignment="Center"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Username:" FontSize="15" Width="80"></Label>
+                    <TextBox x:Name="tbUsername" Width="220" VerticalAlignment="Center"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Password:" FontSize="15" Width="80"></Label>
+                    <PasswordBox x:Name="pbPassword" Width="220" VerticalAlignment="Center"></PasswordBox>
+                </StackPanel>
+            </StackPanel>
         </Grid>
+        <Button x:Name="btnLuuThongTin" Grid.Row="2" Content="Lưu thông tin" FontSize="15" FontWeight="Bold" Foreground="Red" Width="200" Height="30" Margin="5" Click="btnLuuThongTin_Click"></Button>
     </Grid>
 </Window>
-

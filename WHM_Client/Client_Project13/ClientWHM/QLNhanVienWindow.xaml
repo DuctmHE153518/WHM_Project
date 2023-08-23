@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClientWHM"
         ResizeMode="NoResize"
+        WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Title="QLNhanVienWindow" Height="450" Width="800">
     <Grid Background="LightGoldenrodYellow">
@@ -13,7 +14,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Margin="5,0,5,0">
-            <Button x:Name="btnTroVe" Content="Trở Về" FontSize="15" FontWeight="Bold" Width="60" Height="25" HorizontalAlignment="Left"></Button>
+            <Button x:Name="btnTroVe" Content="Trở Về" FontSize="15" FontWeight="Bold" Width="60" Height="25" HorizontalAlignment="Left" Click="btnTroVe_Click"></Button>
             <Label Content="Quản Lý Nhân Viên" FontSize="25" FontWeight="Bold" Foreground="Red" HorizontalAlignment="Center"></Label>
         </Grid>
         <Grid Grid.Row="1" Margin="5">
@@ -30,7 +31,7 @@
                     <Label Content="Danh Sách Nhân Viên" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"></Label>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Tìm Kiếm:" FontSize="20" FontWeight="Bold" Margin="0,0,5,0"></Label>
-                        <TextBox x:Name="tbTimKiem" Width="250" FontSize="15" VerticalAlignment="Center"></TextBox>
+                        <TextBox x:Name="tbTimKiem" Width="250" FontSize="15" VerticalAlignment="Center" TextChanged="tbTimKiem_TextChanged"></TextBox>
                     </StackPanel>
                 </StackPanel>
                 <ListView x:Name="lvNhanVien" Grid.Row="1" Background="LightGoldenrodYellow">
@@ -76,8 +77,8 @@
                             <TextBox x:Name="tbQueQuan" Text="{Binding ElementName=lvNhanVien, Path=SelectedItem.QueQuan, Mode=OneWay}" Width="220" VerticalAlignment="Center"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="SĐT:" FontSize="15" Width="80"></Label>
-                            <TextBox x:Name="tbSDT" Text="{Binding ElementName=lvNhanVien, Path=SelectedItem.Sdt, Mode=OneWay}" Width="220" VerticalAlignment="Center"></TextBox>
+                            <Label Content="Sđt:" FontSize="15" Width="80"></Label>
+                            <TextBox x:Name="tbSdt" Text="{Binding ElementName=lvNhanVien, Path=SelectedItem.Sdt, Mode=OneWay}" Width="220" VerticalAlignment="Center"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Email:" FontSize="15" Width="80"></Label>
@@ -107,9 +108,9 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="btnThem" Content="Thêm" FontSize="20" FontWeight="Bold" Width="100" Margin="0,0,5,0"></Button>
-                    <Button x:Name="btnXoa" Grid.Column="1" Content="Xóa" FontSize="20" FontWeight="Bold" Width="100" Margin="0,0,5,0"></Button>
-                    <Button x:Name="btnSua" Grid.Column="2" Content="Sửa" FontSize="20" FontWeight="Bold" Width="100"></Button>
+                    <Button x:Name="btnThem" Content="Thêm" FontSize="20" FontWeight="Bold" Width="100" Margin="0,0,5,0" Click="btnThem_Click"></Button>
+                    <Button x:Name="btnXoa" Grid.Column="1" Content="Xóa" FontSize="20" FontWeight="Bold" Width="100" Margin="0,0,5,0" Click="btnXoa_Click"></Button>
+                    <Button x:Name="btnSua" Grid.Column="2" Content="Sửa" FontSize="20" FontWeight="Bold" Width="100" Click="btnSua_Click"></Button>
                 </Grid>
             </Grid>
         </Grid>

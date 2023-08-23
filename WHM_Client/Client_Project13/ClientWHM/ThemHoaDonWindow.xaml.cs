@@ -15,13 +15,18 @@ using System.Windows.Shapes;
 namespace ClientWHM
 {
     /// <summary>
-    /// Interaction logic for LenHoaDonWindow.xaml
+    /// Interaction logic for ThemHoaDonWindow.xaml
     /// </summary>
-    public partial class LenHoaDonWindow : Window
+    public partial class ThemHoaDonWindow : Window
     {
-        public LenHoaDonWindow()
+        public ThemHoaDonWindow()
         {
             InitializeComponent();
+        }
+
+        private void btnTroVe_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -7,34 +7,40 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="LoginWindow" Height="300" Width="500">
+        Title="LoginWindow" Height="400" Width="500">
     <Grid Background="LightGoldenrodYellow">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Label Content="Login" FontSize="30" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+        <Label Content="Register" FontSize="30" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
-            <Label Content="Username:" FontSize="15" FontWeight="Bold" Width="100"></Label>
+            <Label Content="Email" FontSize="15" FontWeight="Bold" Width="100"></Label>
+            <TextBox x:Name="tbEmail" Width="280" FontSize="15" VerticalAlignment="Center"></TextBox>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+            <Label Content="Username" FontSize="15" FontWeight="Bold" Width="100"></Label>
             <TextBox x:Name="tbUsername" Width="280" FontSize="15" VerticalAlignment="Center"></TextBox>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
-            <Label Content="Password:" FontSize="15" FontWeight="Bold" Width="100"></Label>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+            <Label Content="Password" FontSize="15" FontWeight="Bold" Width="100"></Label>
             <PasswordBox x:Name="tbPassword" Width="280" FontSize="15" VerticalAlignment="Center"></PasswordBox>
         </StackPanel>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal" Height="37" RenderTransformOrigin="0.507,-0.787" HorizontalAlignment="Center">
-            <Label Content="Re-Password:" FontSize="15" FontWeight="Bold" Width="100"></Label>
+        <StackPanel Grid.Row="4" Orientation="Horizontal" Height="37" RenderTransformOrigin="0.507,-0.787" HorizontalAlignment="Center">
+            <Label Content="Re-Password" FontSize="15" FontWeight="Bold" Width="100"></Label>
             <PasswordBox x:Name="tbRePassword" Width="280" FontSize="15" VerticalAlignment="Center"></PasswordBox>
         </StackPanel>
 
-        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="btnRegister" Content="Rgister" FontSize="20" FontWeight="Bold" Foreground="Black" Width="100" Height="35" Margin="0,0,20,0" Click="btnRegister_Click"/>
             <Button x:Name="btnExit" Content="Exit" FontSize="20" FontWeight="Bold" Foreground="Black" Width="100" Height="35" Click="btnExit_Click"/>
             <Button x:Name="btnLogin" Content="Login" FontSize="20" FontWeight="Bold" Foreground="Black" Width="100" Height="35" Margin="20,0,0,0" Click="btnLogin_Click" />

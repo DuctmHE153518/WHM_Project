@@ -23,5 +23,10 @@ namespace ClientWHM
         {
             InitializeComponent();
         }
+
+        private void btnHuy_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

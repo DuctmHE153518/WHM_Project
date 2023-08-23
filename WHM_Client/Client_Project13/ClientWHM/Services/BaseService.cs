@@ -42,5 +42,23 @@ namespace ClientWHM.Services
             HttpResponseMessage responseMessage = await client.PostAsync(url, content);
             return responseMessage.StatusCode;
         }
+
+        public async Task<HttpStatusCode> PutData<T>(string url, T value, string? accepttype = null)
+        {
+            url = _rootUrl + url;
+            HttpClient client = new HttpClient();
+            var jsonStr = JsonSerializer.Serialize(value);
+            HttpContent content = new StringContent(jsonStr, Encoding.UTF8, "application/json");
+            HttpResponseMessage responseMessage = await client.PutAsync(url, content);
+            return responseMessage.StatusCode;
+        }
+
+        public async Task<HttpStatusCode> DeleteData(string url, string? accepttype = null)
+        {
+            url = _rootUrl + url;
+            HttpClient client = new HttpClient();
+            HttpResponseMessage responseMessage = await client.DeleteAsync(url);
+            return responseMessage.StatusCode;
+        }
     }
 }

@@ -17,11 +17,16 @@ namespace ClientWHM
     /// <summary>
     /// Interaction logic for QLNhapHangWindow.xaml
     /// </summary>
-    public partial class QLNhapHangWindow : Window
+    public partial class QLNhapKhoWindow : Window
     {
-        public QLNhapHangWindow()
+        public QLNhapKhoWindow()
         {
             InitializeComponent();
+        }
+
+        private void btnTroVe_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
