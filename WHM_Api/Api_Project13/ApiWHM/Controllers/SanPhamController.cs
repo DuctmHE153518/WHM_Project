@@ -90,7 +90,14 @@ namespace ApiWHM.Controllers
                 {
                     return NotFound();
                 }
-                a.TenLoai = model.TenLoai;
+                a.TenSp = model.TenSp;
+                a.DonVi = model.DonVi;
+                a.MoTa = model.MoTa;
+                a.MaLoaiSp = model.MaLoaiSp;
+                a.GiaBan = model.GiaBan;
+                a.Slton = model.Slton;
+                a.HinhAnh = model.HinhAnh;
+
                 if (!ModelState.IsValid || a == null)
                 {
                     return BadRequest(ModelState);
