@@ -14,7 +14,6 @@ namespace ApiWHM.Controllers
         private WhmanagementContext _context = new WhmanagementContext();
         [HttpGet]
         [Route("List")]
-        [EnableQuery]
         public IActionResult List()
         {
             try
@@ -34,6 +33,7 @@ namespace ApiWHM.Controllers
                 return BadRequest(e.Message);
             }
         }
+
         [HttpGet]
         [Route("Detail/{id}")]
         public IActionResult Detail(int id)

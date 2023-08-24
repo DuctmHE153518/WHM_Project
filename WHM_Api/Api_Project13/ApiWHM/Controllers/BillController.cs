@@ -2,6 +2,7 @@
 using ApiWHM.Models;
 using Azure.Core;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 
 namespace ApiWHM.Controllers
 {
@@ -20,6 +21,22 @@ namespace ApiWHM.Controllers
         public IActionResult List()
         {
             return Ok(_context.Hoadons.ToList());
+        }
+        [HttpGet]
+        public IActionResult Filter(DateTime dpTuNgay , DateTime dpDenNgay)
+        {
+            return Ok(_context.Hoadons.Where(p => p.NgayLap >= dpTuNgay && p.NgayLap <= dpDenNgay).ToList());
+        }
+        [HttpGet]
+        public IActionResult DoanhThu(DateTime dpTuNgay, DateTime dpDenNgay)
+        {
+            double DoanhThu = 0;
+            var hoadons = _context.Hoadons.Where(p => p.NgayLap >= dpTuNgay && p.NgayLap <= dpDenNgay).ToList();
+            foreach (Hoadon hd in hoadons)
+            {
+                DoanhThu += double.Parse(hd.TongTien.ToString());
+            }
+            return Ok(DoanhThu);
         }
 
         [HttpGet("{id}")]

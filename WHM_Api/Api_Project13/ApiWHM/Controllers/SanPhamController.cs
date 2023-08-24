@@ -35,6 +35,34 @@ namespace ApiWHM.Controllers
             }
         }
         [HttpGet]
+        public IActionResult TopSPBanChay()
+        {
+            try
+            {
+                var result = _context.Chitiethoadons
+                .GroupBy(ct => ct.MaSp)
+                .Select(group => new
+                {
+                    MaSp = group.Key,
+                    TotalQuantity = group.Sum(ct => ct.SoLuong)
+                }).OrderByDescending(item => item.TotalQuantity)
+                .Take(5)
+                .ToList();
+                List<Sanpham> output = new List<Sanpham>();
+                foreach (var item in result)
+                {
+                    Sanpham sp = _context.Sanphams.Where(x=> x.MaSp == item.MaSp).FirstOrDefault(); 
+                    output.Add(sp);
+                }
+
+                return Ok(output);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        [HttpGet]
         [Route("{id}")]
         public IActionResult Detail(int id)
         {
