@@ -6,13 +6,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ApiWHM.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ChitietnhapkhoController : ControllerBase
     {
         private WhmanagementContext _context = new WhmanagementContext();
         [HttpGet]
-        [Route("List")]
         public IActionResult List()
         {
             try
@@ -33,7 +32,7 @@ namespace ApiWHM.Controllers
             }
         }
         [HttpGet]
-        [Route("Detail/{id}")]
+        [Route("{id}")]
         public IActionResult Detail(int id, int masp)
         {
             try
@@ -98,7 +97,7 @@ namespace ApiWHM.Controllers
             try
             {
                 List<Chitietnhapkho> a = _context.Chitietnhapkhos.Where(a => a.MaNhap == id).ToList();
-                Nhapkho nhapkho = _context.Nhapkhos.Where(x => x.MaNhap == id).FirstOrDefault();
+                Nhapkho nhapkho = _context.Nhapkhos.FirstOrDefault(x => x.MaNhap == id);
                 if (a == null || a.Count == 0|| nhapkho == null)
                 {
                     return NotFound();
@@ -143,10 +142,10 @@ namespace ApiWHM.Controllers
         {
             try
             {
-                Chitietnhapkho a = _context.Chitietnhapkhos.Where(a => a.MaNhap == id && a.MaSp == masp).FirstOrDefault();
+                Chitietnhapkho a = _context.Chitietnhapkhos.FirstOrDefault(a => a.MaNhap == id && a.MaSp == masp);
                 _context.Chitietnhapkhos.Remove(a);
                 _context.SaveChanges();
-                Nhapkho nhapkho = _context.Nhapkhos.Where(x => x.MaNhap == id).FirstOrDefault();
+                Nhapkho nhapkho = _context.Nhapkhos.FirstOrDefault(x => x.MaNhap == id);
                 nhapkho.TongTien = nhapkho.TongTien - (a.GiaNhap * (double)a.SoLuong);
                 _context.Nhapkhos.Update(nhapkho);
                 _context.SaveChanges();

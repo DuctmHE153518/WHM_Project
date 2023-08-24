@@ -94,10 +94,29 @@ namespace ClientWHM.Services
 
         //////////////////////////////////////////////////////////////////////////
 
-        public async Task<List<Sanpham>> SearchSanPham(string text)
+        public async Task<bool> AddCTHoaDon(Chitiethoadon chitiethoadon)
         {
-            List<Sanpham> sanphams = await GetData<List<Sanpham>>($"bill/searchp/{text}");
-            return sanphams;
+            string url = "bill/addbd";
+            try
+            {
+                var statusCode = await PushData(url, chitiethoadon);
+                if (statusCode == HttpStatusCode.OK)
+                {
+                    return true;
+                }
+                else if (statusCode == HttpStatusCode.Conflict)
+                {
+                    return false;
+                }
+                else
+                {
+                    throw new Exception($"Add failed with status code: {statusCode}");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }

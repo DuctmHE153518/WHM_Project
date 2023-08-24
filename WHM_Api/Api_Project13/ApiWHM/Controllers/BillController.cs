@@ -73,6 +73,12 @@ namespace ApiWHM.Controllers
                 }
                 else
                 {
+                    List<Chitiethoadon> chitiethoadon = _context.Chitiethoadons.Where(cthd => cthd.MaHd == id).ToList();
+                    foreach(var item in chitiethoadon)
+                    {
+                        _context.Chitiethoadons.Remove(item);
+                        _context.SaveChanges();
+                    }
                     _context.Hoadons.Remove(hoadon);
                     int result = _context.SaveChanges();
                     return Ok(result);
@@ -88,19 +94,20 @@ namespace ApiWHM.Controllers
         /// //////////////////////////////////////////////////////////////////////////////
         /// </summary>
         /// <returns></returns>
-        
-        [HttpGet]
-        public IActionResult ListP()
-        {
-            return Ok(_context.Sanphams.ToList());
-        }
 
-        [HttpGet("{text}")]
-        public ActionResult<Sanpham> SearchP(string text)
+        [HttpPost]
+        public IActionResult AddBD(Chitiethoadon chitiethoadon)
         {
-            List<Sanpham> sanphams = _context.Sanphams.Where(hd => hd.TenSp.Contains(text)).ToList();
-            if (sanphams is null) return NotFound();
-            else return Ok(sanphams);
+            try
+            {
+                _context.Chitiethoadons.Add(chitiethoadon);
+                _context.SaveChanges();
+                return Ok(chitiethoadon.MaHd);
+            }
+            catch
+            {
+                return Conflict();
+            }
         }
 
     }

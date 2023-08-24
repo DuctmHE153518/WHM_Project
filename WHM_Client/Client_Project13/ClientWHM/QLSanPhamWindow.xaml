@@ -32,7 +32,7 @@
                     <Label Content="Danh Sách Sản Phẩm" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"></Label>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Tìm Kiếm:" FontSize="20" FontWeight="Bold" Margin="0,0,5,0"></Label>
-                        <TextBox x:Name="tbTimKiem" Width="250" FontSize="15" VerticalAlignment="Center"></TextBox>
+                        <TextBox x:Name="tbTimKiem" Width="250" FontSize="15" VerticalAlignment="Center" TextChanged="tbTimKiem_TextChanged"></TextBox>
                     </StackPanel>
                 </StackPanel>
                 <ListView x:Name="lvSanPham" Grid.Row="1" Background="LightGoldenrodYellow" >
@@ -44,7 +44,7 @@
                             <GridViewColumn Header="Mô Tả" DisplayMemberBinding="{Binding MoTa}"></GridViewColumn>
                             <GridViewColumn Header="Loại SP" DisplayMemberBinding="{Binding MaLoaiSp}"></GridViewColumn>
                             <GridViewColumn Header="Giá Bán" DisplayMemberBinding="{Binding GiaBan}"></GridViewColumn>
-                            <GridViewColumn Header="SL Tồn" DisplayMemberBinding="{Binding Slton}"></GridViewColumn>
+                            <GridViewColumn Header="SL Tồn" DisplayMemberBinding="{Binding SltonKho}"></GridViewColumn>
                             <GridViewColumn Header="Hình Ảnh" DisplayMemberBinding="{Binding HinhAnh}"></GridViewColumn>
                         </GridView>
                     </ListView.View>
@@ -77,21 +77,23 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Loại SP:" FontSize="15" Width="80"></Label>
-                            <ComboBox x:Name="cbLoaiSP" Width="220" VerticalAlignment="Center">
+                            <TextBox x:Name="tbLoaiSp" Text="{Binding ElementName=lvSanPham, Path=SelectedItem.MaLoaiSp, Mode=OneWay}" Width="220" VerticalAlignment="Center"></TextBox>
+
+                            <!--<ComboBox x:Name="cbLoaiSP" Width="220" VerticalAlignment="Center">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding TenLoai}" FontSize="15"></TextBlock>
+                                        <TextBox Text="{Binding MaLoaiSp}" FontSize="15"></TextBox>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
-                            </ComboBox>
+                            </ComboBox>-->
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Giá Bán:" FontSize="15" Width="80"></Label>
                             <TextBox x:Name="tbGiaBan" Text="{Binding ElementName=lvSanPham, Path=SelectedItem.GiaBan, Mode=OneWay}" Width="220" VerticalAlignment="Center"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="SL Tồn:" FontSize="15" Width="80"></Label>
-                            <TextBox x:Name="tbSLTon" Text="{Binding ElementName=lvSanPham, Path=SelectedItem.Slton, Mode=OneWay}" Width="220" VerticalAlignment="Center"></TextBox>
+                            <Label Content="Tồn Kho:" FontSize="15" Width="80"></Label>
+                            <TextBox x:Name="tbSLTonKho" Text="{Binding ElementName=lvSanPham, Path=SelectedItem.SltonKho, Mode=OneWay}" Width="220" VerticalAlignment="Center"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Hình Ảnh:" FontSize="15" Width="80"></Label>
@@ -99,7 +101,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Image x:Name="HinhAnh" Source="{Binding ElementName=lvSanPham, Path=SelectedItem.HinhAnh}" Width="150" Height="80" Stretch="Fill"></Image>
-                            <Button x:Name="btnChon" Content="Chọn" Height="25" Width="80" Margin="10,0,0,0" ></Button>
+                            <Button x:Name="btnChon" Content="Chọn" Height="25" Width="80" Margin="10,0,0,0" Click="btnChon_Click" ></Button>
                         </StackPanel>
                     </StackPanel>
                 </Grid>
@@ -109,9 +111,9 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="btnThem" Content="Thêm" FontSize="20" FontWeight="Bold" Width="100" Margin="0,0,5,0"></Button>
-                    <Button x:Name="btnXoa" Grid.Column="1" Content="Xóa" FontSize="20" FontWeight="Bold" Width="100" Margin="0,0,5,0"></Button>
-                    <Button x:Name="btnSua" Grid.Column="2" Content="Sửa" FontSize="20" FontWeight="Bold" Width="100"></Button>
+                    <Button x:Name="btnThem" Content="Thêm" FontSize="20" FontWeight="Bold" Width="100" Margin="0,0,5,0" Click="btnThem_Click"></Button>
+                    <Button x:Name="btnXoa" Grid.Column="1" Content="Xóa" FontSize="20" FontWeight="Bold" Width="100" Margin="0,0,5,0" Click="btnXoa_Click"></Button>
+                    <Button x:Name="btnSua" Grid.Column="2" Content="Sửa" FontSize="20" FontWeight="Bold" Width="100" Height="31" VerticalAlignment="Top" Click="btnSua_Click"></Button>
                 </Grid>
             </Grid>
         </Grid>

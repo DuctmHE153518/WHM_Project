@@ -11,17 +11,18 @@ namespace ApiWHM.Controllers
     public class SanPhamController : ControllerBase
     {
         private WhmanagementContext _context = new WhmanagementContext();
+        
         [HttpGet]
         public IActionResult List()
         {
             try
             {
-                return Ok(_context.Sanphams.Include("MaLoaiSpNavigation").Select(x => new
+                return Ok(_context.Sanphams.Include(x => x.MaLoaiSpNavigation).Select(x => new
                 {
                     x.MaSp,
                     x.TenSp,
                     x.DonVi,
-                    x.MoTa ,
+                    x.MoTa,
                     x.MaLoaiSp,
                     x.GiaBan,
                     x.SltonKho,
@@ -34,6 +35,7 @@ namespace ApiWHM.Controllers
                 return BadRequest(e.Message);
             }
         }
+
         [HttpGet]
         [Route("{id}")]
         public IActionResult Detail(int id)
@@ -79,35 +81,32 @@ namespace ApiWHM.Controllers
             }
         }
         [HttpPut]
-        [EnableQuery]
-        public IActionResult Update(Sanpham model)
+        public IActionResult Update(Sanpham sanpham)
         {
             try
             {
-                Sanpham a = _context.Sanphams.Where(a => a.MaSp == model.MaSp).FirstOrDefault();
-                if (a == null)
+                Sanpham sp = _context.Sanphams.FirstOrDefault(n => n.MaSp == sanpham.MaSp);
+                if (sp is null)
                 {
-                    return NotFound();
+                    return StatusCode(444, "San pham is not found");
                 }
-                a.TenSp = model.TenSp;
-                a.DonVi = model.DonVi;
-                a.MoTa = model.MoTa;
-                a.MaLoaiSp = model.MaLoaiSp;
-                a.GiaBan = model.GiaBan;
-                a.SltonKho = model.SltonKho;
-                a.HinhAnh = model.HinhAnh;
-
-                if (!ModelState.IsValid || a == null)
+                else
                 {
-                    return BadRequest(ModelState);
+                    sp.TenSp = sanpham.TenSp;
+                    sp.DonVi = sanpham.DonVi;
+                    sp.MoTa = sanpham.MoTa;
+                    sp.MaLoaiSp = sanpham.MaLoaiSp;
+                    sp.GiaBan = sanpham.GiaBan;
+                    sp.SltonKho = sanpham.SltonKho;
+                    sp.HinhAnh = sanpham.HinhAnh;
+                    _context.Sanphams.Update(sp);
+                    int result = _context.SaveChanges();
+                    return Ok(result);
                 }
-                _context.Sanphams.Update(a);
-                _context.SaveChanges();
-                return Ok();
             }
-            catch (Exception e)
+            catch
             {
-                return BadRequest(e.Message);
+                return Conflict();
             }
         }
 
@@ -117,7 +116,7 @@ namespace ApiWHM.Controllers
         {
             try
             {
-                Sanpham a = _context.Sanphams.Where(a => a.MaSp == id).FirstOrDefault();
+                Sanpham a = _context.Sanphams.FirstOrDefault(a => a.MaSp == id);
                 _context.Sanphams.Remove(a);
                 _context.SaveChanges();
                 return Ok();

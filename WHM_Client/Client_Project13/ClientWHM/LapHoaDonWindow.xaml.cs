@@ -56,7 +56,7 @@ namespace ClientWHM
             this.Close();
         }
 
-        private void btnLapHoaDon_Click(object sender, RoutedEventArgs e)
+        private async void btnLapHoaDon_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(tbHoTenKH.Text) || string.IsNullOrWhiteSpace(tbDiaChi.Text) || string.IsNullOrWhiteSpace(tbSDT.Text))
                 MessageBox.Show("Chưa nhập đủ thông tin !!!");
@@ -64,6 +64,8 @@ namespace ClientWHM
                 MessageBox.Show("Chưa đúng định dạng của SĐT !!!");
             else
             {
+                BillService billService = new BillService();
+
                 var newHD = new Hoadon()
                 {
                     NgayLap = DateTime.Parse(tbNgayLap.Text),
@@ -73,8 +75,10 @@ namespace ClientWHM
                     DiaChi = tbDiaChi.Text,
                     Sdt = tbSDT.Text
                 };
+                //await billService.AddHoaDon(newHD);
                 _context.Hoadons.Add(newHD);
                 _context.SaveChanges();
+
                 foreach (Chitiethoadon ct in GioHang)
                 {
                     var selectedSp = _context.Sanphams.ToList().Where(p => p.MaSp == ct.MaSp).SingleOrDefault();

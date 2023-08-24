@@ -32,7 +32,7 @@
                     <Label Content="Danh Sách Sản Phẩm" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"></Label>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Tìm Kiếm:" FontSize="20" FontWeight="Bold" Margin="0,0,5,0"></Label>
-                        <TextBox x:Name="tbTimKiem" Width="250" FontSize="15" VerticalAlignment="Center"></TextBox>
+                        <TextBox x:Name="tbTimKiem" Width="250" FontSize="15" VerticalAlignment="Center" TextChanged="tbTimKiem_TextChanged"></TextBox>
                     </StackPanel>
                 </StackPanel>
                 <ListView x:Name="lvSanPham" Grid.Row="1" Background="LightGoldenrodYellow">
@@ -78,7 +78,7 @@
                                     <TextBox x:Name="tbSLNhap" Width="200" VerticalAlignment="Center"></TextBox>
                                 </StackPanel>
                             </StackPanel>
-                            <Button x:Name="btnThemDSNhap" Grid.Column="1" FontSize="15" FontWeight="Bold" Width="80" Height="80">
+                            <Button x:Name="btnThemDSNhap" Grid.Column="1" FontSize="15" FontWeight="Bold" Width="80" Height="80" Click="btnThemDSNhap_Click">
                                 <Button.Content>
                                     <TextBlock Text="Thêm Vào DS Nhập" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
                                 </Button.Content>
@@ -112,7 +112,7 @@
                             <TextBox x:Name="tbTongTien" Width="220" FontSize="20" FontWeight="Bold" Foreground="Red" VerticalAlignment="Center" IsReadOnly="True"></TextBox>
                             <Label Content="VNĐ" FontSize="20" FontWeight="Bold" Foreground="Red"></Label>
                         </StackPanel>
-                        <Button x:Name="btnNhapHang" Content="Nhập Hàng" FontSize="20" FontWeight="Bold" Foreground="Red" Width="150" Height="40" HorizontalAlignment="Right"></Button>
+                        <Button x:Name="btnNhapHang" Content="Nhập Hàng" FontSize="20" FontWeight="Bold" Foreground="Red" Width="150" Height="40" HorizontalAlignment="Right" Click="btnNhapHang_Click"></Button>
                     </StackPanel>
                 </Grid>
             </Grid>
