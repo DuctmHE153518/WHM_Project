@@ -54,7 +54,6 @@ namespace ClientWHM
                 UserService userService = new UserService();
                 Nhanvien nhanvien = new Nhanvien();
 
-                nhanvien.MaNv = int.Parse(tbMaNV.Text);
                 nhanvien.HoTen = tbHoTen.Text;
                 nhanvien.NgaySinh = dpNgaySinh.SelectedDate;
                 nhanvien.QueQuan = tbQueQuan.Text;

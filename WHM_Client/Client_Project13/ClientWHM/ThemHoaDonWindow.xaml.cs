@@ -34,10 +34,11 @@ namespace ClientWHM
 
         private async void LoadData()
         {
-            
             try
             {
-                lvSanPham.ItemsSource = _context.Sanphams.ToList();
+                ProductService productService = new ProductService();
+                lvSanPham.ItemsSource = await productService.GetSanPhams();
+
                 GioHang = new List<Chitiethoadon>();
                 TongTien = 0;
                 tbTongTien.Text = TongTien.ToString();
@@ -64,8 +65,8 @@ namespace ClientWHM
                 }
                 else
                 {
-                    BillService billService = new BillService();
-                    lvSanPham.ItemsSource = await billService.SearchSanPham(text);
+                    ProductService productService = new ProductService();
+                    lvSanPham.ItemsSource = await productService.SearchSanPham(text);
                 }
             }
             catch (Exception ex)

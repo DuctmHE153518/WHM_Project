@@ -6,14 +6,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ApiWHM.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class NhapKhoController : ControllerBase
     {
         private WhmanagementContext _context = new WhmanagementContext();
         [HttpGet]
-        [EnableQuery]
-        [Route("List")]
         public IActionResult List()
         {
             try
@@ -72,13 +70,13 @@ namespace ApiWHM.Controllers
                 return BadRequest(e.Message);
             }
         }
-        [HttpPut("{id}")]
+        [HttpPut]
         [EnableQuery]
-        public IActionResult Update(int id, Nhapkho model)
+        public IActionResult Update(Nhapkho model)
         {
             try
             {
-                Nhapkho a = _context.Nhapkhos.Where(a => a.MaNhap == id).FirstOrDefault();
+                Nhapkho a = _context.Nhapkhos.FirstOrDefault(a => a.MaNhap == model.MaNhap);
                 if(a == null)
                 {
                     return NotFound();
@@ -106,7 +104,7 @@ namespace ApiWHM.Controllers
         {
             try
             {
-                Nhapkho a = _context.Nhapkhos.Where(a => a.MaNhap == id).FirstOrDefault();
+                Nhapkho a = _context.Nhapkhos.FirstOrDefault(a => a.MaNhap == id);
                 _context.Nhapkhos.Remove(a);
                 _context.SaveChanges();
                 return Ok();

@@ -32,7 +32,7 @@
                     <Label Content="Danh Sách Sản Phẩm" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"></Label>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Tìm Kiếm:" FontSize="20" FontWeight="Bold" Margin="0,0,5,0"></Label>
-                        <TextBox x:Name="tbTimKiem" Width="250" FontSize="15" VerticalAlignment="Center"></TextBox>
+                        <TextBox x:Name="tbTimKiem" Width="250" FontSize="15" VerticalAlignment="Center" TextChanged="tbTimKiem_TextChanged"></TextBox>
                     </StackPanel>
                 </StackPanel>
                 <ListView x:Name="lvSanPham" Grid.Row="1" Background="LightGoldenrodYellow">
@@ -70,27 +70,27 @@
                                     <TextBox x:Name="tbMaSP" Text="{Binding ElementName=lvSanPham, Path=SelectedItem.MaSp, Mode=OneWay}" Width="200" IsReadOnly="True" VerticalAlignment="Center"></TextBox>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
-                                    <Label Content="Giá Nhập:" FontSize="15" Width="100"></Label>
-                                    <TextBox x:Name="tbGiaNhap" Width="200" VerticalAlignment="Center"></TextBox>
+                                    <Label Content="Giá Xuất:" FontSize="15" Width="100"></Label>
+                                    <TextBox x:Name="tbGiaXuat" Width="200" VerticalAlignment="Center"></TextBox>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
-                                    <Label Content="SL Nhập:" FontSize="15" Width="100"></Label>
-                                    <TextBox x:Name="tbSLNhap" Width="200" VerticalAlignment="Center"></TextBox>
+                                    <Label Content="SL Xuất:" FontSize="15" Width="100"></Label>
+                                    <TextBox x:Name="tbSLXuat" Width="200" VerticalAlignment="Center"></TextBox>
                                 </StackPanel>
                             </StackPanel>
-                            <Button x:Name="btnThemDSNhap" Grid.Column="1" FontSize="15" FontWeight="Bold" Width="80" Height="80">
+                            <Button x:Name="btnThemDSXuat" Grid.Column="1" FontSize="15" FontWeight="Bold" Width="80" Height="80" Click="btnThemDSXuat_Click">
                                 <Button.Content>
-                                    <TextBlock Text="Thêm Vào DS Nhập" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
+                                    <TextBlock Text="Thêm Vào DS Xuất" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
                                 </Button.Content>
                             </Button>
                         </Grid>
-                        <Label DockPanel.Dock="Top" Content="Danh Sách Sản Phẩm Nhập" FontSize="15" FontWeight="Bold"></Label>
+                        <Label DockPanel.Dock="Top" Content="Danh Sách Sản Phẩm Xuất" FontSize="15" FontWeight="Bold"></Label>
                         <ListView x:Name="lvSanPhamNhap" Background="LightGoldenrodYellow">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Mã SP" DisplayMemberBinding="{Binding MaSp}"></GridViewColumn>
                                     <GridViewColumn Header="Số Lượng" DisplayMemberBinding="{Binding SoLuong}"></GridViewColumn>
-                                    <GridViewColumn Header="Giá Nhập" DisplayMemberBinding="{Binding GiaNhap}"></GridViewColumn>
+                                    <GridViewColumn Header="Giá Xuất" DisplayMemberBinding="{Binding GiaXuat}"></GridViewColumn>
                                 </GridView>
                             </ListView.View>
                             <ListView.ContextMenu>
@@ -112,7 +112,7 @@
                             <TextBox x:Name="tbTongTien" Width="220" FontSize="20" FontWeight="Bold" Foreground="Red" VerticalAlignment="Center" IsReadOnly="True"></TextBox>
                             <Label Content="VNĐ" FontSize="20" FontWeight="Bold" Foreground="Red"></Label>
                         </StackPanel>
-                        <Button x:Name="btnNhapHang" Content="Nhập Hàng" FontSize="20" FontWeight="Bold" Foreground="Red" Width="150" Height="40" HorizontalAlignment="Right"></Button>
+                        <Button x:Name="btnXuatHang" Content="Xuất Hàng" FontSize="20" FontWeight="Bold" Foreground="Red" Width="150" Height="40" HorizontalAlignment="Right" Click="btnXuatHang_Click"></Button>
                     </StackPanel>
                 </Grid>
             </Grid>

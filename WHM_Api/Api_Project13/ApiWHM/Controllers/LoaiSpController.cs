@@ -71,7 +71,7 @@ namespace ApiWHM.Controllers
         {
             try
             {
-                Loaisanpham a = _context.Loaisanphams.Where(a => a.MaLoaiSp == model.MaLoaiSp).FirstOrDefault();
+                Loaisanpham a = _context.Loaisanphams.FirstOrDefault(a => a.MaLoaiSp == model.MaLoaiSp);
                 if (a == null)
                 {
                     return NotFound();

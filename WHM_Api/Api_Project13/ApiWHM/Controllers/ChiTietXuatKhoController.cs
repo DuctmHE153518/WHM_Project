@@ -6,14 +6,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ApiWHM.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ChitietxuatkhoController : ControllerBase
     {
         private WhmanagementContext _context = new WhmanagementContext();
         [HttpGet]
-        [EnableQuery]
-        [Route("List")]
         public IActionResult List()
         {
             try
@@ -34,7 +32,7 @@ namespace ApiWHM.Controllers
             }
         }
         [HttpGet]
-        [Route("Detail/{id}")]
+        [Route("{id}")]
         public IActionResult Detail(int id, int masp)
         {
             try
@@ -55,7 +53,7 @@ namespace ApiWHM.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("{id}")]
         [EnableQuery]
         public IActionResult Add(List<Chitietxuatkho> model, int idNv)
         {
@@ -99,7 +97,7 @@ namespace ApiWHM.Controllers
             try
             {
                 List<Chitietxuatkho> a = _context.Chitietxuatkhos.Where(a => a.MaXuat == id).ToList();
-                Xuatkho xuatkho = _context.Xuatkhos.Where(x => x.MaXuat == id).FirstOrDefault();
+                Xuatkho xuatkho = _context.Xuatkhos.FirstOrDefault(x => x.MaXuat == id);
                 if (a == null || a.Count == 0 || xuatkho == null)
                 {
                     return NotFound();
@@ -144,10 +142,10 @@ namespace ApiWHM.Controllers
         {
             try
             {
-                Chitietxuatkho a = _context.Chitietxuatkhos.Where(a => a.MaXuat == id && a.MaSp == masp).FirstOrDefault();
+                Chitietxuatkho a = _context.Chitietxuatkhos.FirstOrDefault(a => a.MaXuat == id && a.MaSp == masp);
                 _context.Chitietxuatkhos.Remove(a);
                 _context.SaveChanges();
-                Xuatkho xuatkho = _context.Xuatkhos.Where(x => x.MaXuat == id).FirstOrDefault();
+                Xuatkho xuatkho = _context.Xuatkhos.FirstOrDefault(x => x.MaXuat == id);
                 xuatkho.TongTien = xuatkho.TongTien - (a.GiaNhap * (double)a.SoLuong);
                 _context.Xuatkhos.Update(xuatkho);
                 _context.SaveChanges();

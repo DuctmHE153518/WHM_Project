@@ -7,13 +7,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ApiWHM.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class XuatKhoController : ControllerBase
     {
         private WhmanagementContext _context = new WhmanagementContext();
         [HttpGet]
-        [Route("List")]
         public IActionResult List()
         {
             try
@@ -35,7 +34,7 @@ namespace ApiWHM.Controllers
         }
 
         [HttpGet]
-        [Route("Detail/{id}")]
+        [Route("{id}")]
         public IActionResult Detail(int id)
         {
             try
@@ -80,13 +79,13 @@ namespace ApiWHM.Controllers
                 return BadRequest(e.Message);
             }
         }
-        [HttpPut("{id}")]
+        [HttpPut]
         [EnableQuery]
-        public IActionResult Update(int id, Xuatkho model)
+        public IActionResult Update(Xuatkho model)
         {
             try
             {
-                Xuatkho a = _context.Xuatkhos.Where(a => a.MaXuat == id).FirstOrDefault();
+                Xuatkho a = _context.Xuatkhos.FirstOrDefault(a => a.MaXuat == model.MaXuat);
                 if (a == null)
                 {
                     return NotFound();
@@ -114,7 +113,7 @@ namespace ApiWHM.Controllers
         {
             try
             {
-                Xuatkho a = _context.Xuatkhos.Where(a => a.MaXuat == id).FirstOrDefault();
+                Xuatkho a = _context.Xuatkhos.FirstOrDefault(a => a.MaXuat == id);
                 _context.Xuatkhos.Remove(a);
                 _context.SaveChanges();
                 return Ok();

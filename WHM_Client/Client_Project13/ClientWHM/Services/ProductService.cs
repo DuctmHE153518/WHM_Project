@@ -107,7 +107,7 @@ namespace ClientWHM.Services
 
         public async Task<List<Sanpham>> SearchSanPham(string text)
         {
-            List<Sanpham> sanphams = await GetData<List<Sanpham>>($"loaisp/search/{text}");
+            List<Sanpham> sanphams = await GetData<List<Sanpham>>($"sanpham/search/{text}");
             return sanphams;
         }
     }

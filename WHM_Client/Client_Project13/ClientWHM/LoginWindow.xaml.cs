@@ -47,7 +47,7 @@ namespace ClientWHM
                         if(user != null)
                         {
                             Value.Username = user.Username;
-                            Value.Role = user.ChucVu.ToUpper();
+                            Value.Role = user.ChucVu;
                             Value.ShowId = user.MaNv;
                             if (user.ChucVu.Equals("Staff"))
                             {
