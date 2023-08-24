@@ -6,13 +6,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ApiWHM.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class SanPhamController : ControllerBase
     {
         private WhmanagementContext _context = new WhmanagementContext();
         [HttpGet]
-        [Route("List")]
         public IActionResult List()
         {
             try
@@ -25,7 +24,7 @@ namespace ApiWHM.Controllers
                     x.MoTa ,
                     x.MaLoaiSp,
                     x.GiaBan,
-                    x.Slton,
+                    x.SltonKho,
                     x.HinhAnh,
                     x.MaLoaiSpNavigation
                 }).ToList());
@@ -36,7 +35,7 @@ namespace ApiWHM.Controllers
             }
         }
         [HttpGet]
-        [Route("Detail/{id}")]
+        [Route("{id}")]
         public IActionResult Detail(int id)
         {
             try
@@ -49,7 +48,7 @@ namespace ApiWHM.Controllers
                     x.MoTa,
                     x.MaLoaiSp,
                     x.GiaBan,
-                    x.Slton,
+                    x.SltonKho,
                     x.HinhAnh,
                     x.MaLoaiSpNavigation
                 }).ToList());
@@ -79,13 +78,13 @@ namespace ApiWHM.Controllers
                 return BadRequest(e.Message);
             }
         }
-        [HttpPut("{id}")]
+        [HttpPut]
         [EnableQuery]
-        public IActionResult Update(int id, Sanpham model)
+        public IActionResult Update(Sanpham model)
         {
             try
             {
-                Sanpham a = _context.Sanphams.Where(a => a.MaSp == id).FirstOrDefault();
+                Sanpham a = _context.Sanphams.Where(a => a.MaSp == model.MaSp).FirstOrDefault();
                 if (a == null)
                 {
                     return NotFound();
@@ -95,7 +94,7 @@ namespace ApiWHM.Controllers
                 a.MoTa = model.MoTa;
                 a.MaLoaiSp = model.MaLoaiSp;
                 a.GiaBan = model.GiaBan;
-                a.Slton = model.Slton;
+                a.SltonKho = model.SltonKho;
                 a.HinhAnh = model.HinhAnh;
 
                 if (!ModelState.IsValid || a == null)
@@ -127,6 +126,14 @@ namespace ApiWHM.Controllers
             {
                 return BadRequest(e.Message);
             }
+        }
+
+        [HttpGet("{text}")]
+        public ActionResult<Sanpham> Search(string text)
+        {
+            List<Sanpham> sanphams = _context.Sanphams.Where(sp => sp.TenSp.Contains(text)).ToList();
+            if (sanphams is null) return NotFound();
+            else return Ok(sanphams);
         }
     }
 }

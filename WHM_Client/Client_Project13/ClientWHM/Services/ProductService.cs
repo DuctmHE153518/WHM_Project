@@ -9,45 +9,33 @@ using System.Threading.Tasks;
 
 namespace ClientWHM.Services
 {
-    internal class BillService : BaseService
+    internal class ProductService : BaseService
     {
         private readonly HttpClient httpClient;
 
-        public BillService()
+        public ProductService()
         {
             httpClient = new HttpClient();
         }
 
-        public async Task<List<Hoadon>?> GetHoaDons()
+        public async Task<List<Sanpham>?> GetSanPhams()
         {
-            List<Hoadon>? hoadons = await GetData<List<Hoadon>>("bill/list");
-            return hoadons;
+            List<Sanpham>? sanphams = await GetData<List<Sanpham>>("sanpham/list");
+            return sanphams;
         }
 
-        public async Task<Nhanvien> GetHoaDon(int id)
+        public async Task<Sanpham> GetSanPham(int id)
         {
-            Nhanvien nhanvien = await GetData<Nhanvien>($"bill/get/{id}");
-            return nhanvien;
+            Sanpham sanpham = await GetData<Sanpham>($"sanpham/detail/{id}");
+            return sanpham;
         }
 
-        public async Task<List<Hoadon>> SearchHoaDon(string text)
+        public async Task<bool> AddSanPham(Sanpham sanpham)
         {
-            List<Hoadon> hoadons = await GetData<List<Hoadon>>($"bill/search/{text}");
-            return hoadons;
-        }
-
-        public async Task<List<Chitiethoadon>?> GetChiTietHoaDon(int id)
-        {
-            List<Chitiethoadon>? chitiethoadon = await GetData<List<Chitiethoadon>>($"bill/listbilldetail/{id}");
-            return chitiethoadon;
-        }
-
-        public async Task<bool> AddHoaDon(Hoadon hoadon)
-        {
-            string url = "bill/add";
+            string url = "sanpham/add";
             try
             {
-                var statusCode = await PushData(url, hoadon);
+                var statusCode = await PushData(url, sanpham);
                 if (statusCode == HttpStatusCode.OK)
                 {
                     return true;
@@ -67,9 +55,34 @@ namespace ClientWHM.Services
             }
         }
 
-        public async Task<bool> DeleteHoaDon(int id)
+        public async Task<bool> EditSanPham(Sanpham sanpham)
         {
-            string url = $"bill/delete/{id}";
+            string url = "sanpham/update";
+            try
+            {
+                var statusCode = await PutData(url, sanpham);
+                if (statusCode == HttpStatusCode.OK)
+                {
+                    return true;
+                }
+                else if (statusCode == HttpStatusCode.Conflict)
+                {
+                    return false;
+                }
+                else
+                {
+                    throw new Exception($"Edit failed with status code: {statusCode}");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<bool> DeleteSanPham(int id)
+        {
+            string url = $"sanpham/remove/{id}";
             try
             {
                 var statusCode = await DeleteData(url);
@@ -92,11 +105,9 @@ namespace ClientWHM.Services
             }
         }
 
-        //////////////////////////////////////////////////////////////////////////
-
         public async Task<List<Sanpham>> SearchSanPham(string text)
         {
-            List<Sanpham> sanphams = await GetData<List<Sanpham>>($"bill/searchp/{text}");
+            List<Sanpham> sanphams = await GetData<List<Sanpham>>($"loaisp/search/{text}");
             return sanphams;
         }
     }

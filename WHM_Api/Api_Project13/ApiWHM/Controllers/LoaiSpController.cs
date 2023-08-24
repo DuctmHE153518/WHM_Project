@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ApiWHM.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class LoaiSpController : ControllerBase
     {
         private WhmanagementContext _context = new WhmanagementContext();
+        
         [HttpGet]
-        [Route("List")]
         public IActionResult List()
         {
             try
@@ -29,7 +29,7 @@ namespace ApiWHM.Controllers
             }
         }
         [HttpGet]
-        [Route("Detail/{id}")]
+        [Route("{id}")]
         public IActionResult Detail(int id)
         {
             try
@@ -65,13 +65,13 @@ namespace ApiWHM.Controllers
                 return BadRequest(e.Message);
             }
         }
-        [HttpPut("{id}")]
+        [HttpPut]
         [EnableQuery]
-        public IActionResult Update(int id, Loaisanpham model)
+        public IActionResult Update(Loaisanpham model)
         {
             try
             {
-                Loaisanpham a = _context.Loaisanphams.Where(a => a.MaLoaiSp == id).FirstOrDefault();
+                Loaisanpham a = _context.Loaisanphams.Where(a => a.MaLoaiSp == model.MaLoaiSp).FirstOrDefault();
                 if (a == null)
                 {
                     return NotFound();
@@ -106,6 +106,14 @@ namespace ApiWHM.Controllers
             {
                 return BadRequest(e.Message);
             }
+        }
+
+        [HttpGet("{text}")]
+        public ActionResult<Loaisanpham> Search(string text)
+        {
+            List<Loaisanpham> loaisanphams = _context.Loaisanphams.Where(lsp => lsp.TenLoai.Contains(text)).ToList();
+            if (loaisanphams is null) return NotFound();
+            else return Ok(loaisanphams);
         }
     }
 }

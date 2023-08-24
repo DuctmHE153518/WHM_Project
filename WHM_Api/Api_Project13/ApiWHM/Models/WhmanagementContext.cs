@@ -84,8 +84,10 @@ public partial class WhmanagementContext : DbContext
 
         modelBuilder.Entity<Chitietxuatkho>(entity =>
         {
-            entity.HasKey(e => new { e.MaXuat, e.MaSp }).HasName("PK_CHITIETXUATHANG");
-            entity.ToTable("CHITIETXUATKHO");
+            entity
+                .HasNoKey()
+                .ToTable("CHITIETXUATKHO");
+
             entity.Property(e => e.MaSp).HasColumnName("MaSP");
 
             entity.HasOne(d => d.MaSpNavigation).WithMany()

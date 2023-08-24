@@ -32,7 +32,7 @@
                     <Label Content="Danh Sách Loại Sản Phẩm" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"></Label>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Tìm Kiếm:" FontSize="20" FontWeight="Bold" Margin="0,0,5,0"></Label>
-                        <TextBox x:Name="tbTimKiem" Width="250" FontSize="15" VerticalAlignment="Center"></TextBox>
+                        <TextBox x:Name="tbTimKiem" Width="250" FontSize="15" VerticalAlignment="Center" TextChanged="tbTimKiem_TextChanged"></TextBox>
                     </StackPanel>
                 </StackPanel>
                 <ListView x:Name="lvLoaiSanPham" Grid.Row="1" Background="LightGoldenrodYellow">
@@ -69,9 +69,9 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="btnThem" Content="Thêm" FontSize="20" FontWeight="Bold" Width="100" Margin="0,0,5,0"></Button>
-                    <Button x:Name="btnXoa" Grid.Column="1" Content="Xóa" FontSize="20" FontWeight="Bold" Width="100" Margin="0,0,5,0"></Button>
-                    <Button x:Name="btnSua" Grid.Column="2" Content="Sửa" FontSize="20" FontWeight="Bold" Width="100"></Button>
+                    <Button x:Name="btnThem" Content="Thêm" FontSize="20" FontWeight="Bold" Width="100" Margin="0,0,5,0" Click="btnThem_Click"></Button>
+                    <Button x:Name="btnXoa" Grid.Column="1" Content="Xóa" FontSize="20" FontWeight="Bold" Width="100" Margin="0,0,5,0" Height="31" VerticalAlignment="Top" Click="btnXoa_Click"></Button>
+                    <Button x:Name="btnSua" Grid.Column="2" Content="Sửa" FontSize="20" FontWeight="Bold" Width="100" Click="btnSua_Click"></Button>
                 </Grid>
             </Grid>
         </Grid>
