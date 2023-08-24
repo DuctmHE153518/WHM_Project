@@ -79,17 +79,24 @@ namespace ClientWHM
         {
             try
             {
-                int id = int.Parse(tbMaNV.Text);
-                UserService userService = new UserService();
-                await userService.DeleteNhanvien(id);
-                MessageBox.Show("Cap nhap thong tin nhan vien thanh cong!");
-                LoadData();
+                MessageBoxResult result = MessageBox.Show("Ban chac chan muon xoa nhan vien nay?", "Xac nhan Xoa", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    int id = int.Parse(tbMaNV.Text);
+                    UserService userService = new UserService();
+                    await userService.DeleteNhanvien(id);
+                    MessageBox.Show("Xoa nhan vien thanh cong!");
+                    LoadData();
+                }
+                else
+                {
+                    MessageBox.Show("Huy xoa nhan vien!");
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            
         }
 
         private async void btnSua_Click(object sender, RoutedEventArgs e)
@@ -125,7 +132,7 @@ namespace ClientWHM
             try
             {
                 string text = tbTimKiem.Text;
-                if (text == null)
+                if (text == "")
                 {
                     LoadData();
                 }

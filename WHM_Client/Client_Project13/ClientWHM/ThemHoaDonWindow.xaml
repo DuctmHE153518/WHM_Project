@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
         <Grid Margin="5,0,5,0">
             <Button x:Name="btnTroVe" Content="Trở Về" FontSize="15" FontWeight="Bold" Width="60" Height="25" HorizontalAlignment="Left" Click="btnTroVe_Click"></Button>
-            <Label Content="Lập Hóa Đơn" FontSize="25" FontWeight="Bold" Foreground="Red" HorizontalAlignment="Center"></Label>
+            <Label Content="Thêm Hóa Đơn" FontSize="25" FontWeight="Bold" Foreground="Red" HorizontalAlignment="Center"></Label>
         </Grid>
         <Grid Grid.Row="1" Margin="5">
             <Grid.ColumnDefinitions>
@@ -32,7 +32,7 @@
                     <Label Content="Danh Sách Sản Phẩm" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"></Label>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Tìm Kiếm:" FontSize="20" FontWeight="Bold" Margin="0,0,5,0"></Label>
-                        <TextBox x:Name="tbTimKiem" Width="250" FontSize="15" VerticalAlignment="Center"></TextBox>
+                        <TextBox x:Name="tbTimKiem" Width="250" FontSize="15" VerticalAlignment="Center" TextChanged="tbTimKiem_TextChanged"></TextBox>
                     </StackPanel>
                 </StackPanel>
                 <ListView Grid.Row="1" Background="LightGoldenrodYellow" x:Name="lvSanPham">
@@ -42,9 +42,9 @@
                             <GridViewColumn Header="Tên SP" DisplayMemberBinding="{Binding TenSp}"></GridViewColumn>
                             <GridViewColumn Header="Đơn Vị" DisplayMemberBinding="{Binding DonVi}"></GridViewColumn>
                             <GridViewColumn Header="Mô Tả" DisplayMemberBinding="{Binding MoTa}"></GridViewColumn>
-                            <GridViewColumn Header="Loại SP" DisplayMemberBinding="{Binding MaLoaiSpNavigation.TenLoai}"></GridViewColumn>
+                            <GridViewColumn Header="Loại SP" DisplayMemberBinding="{Binding MaLoaiSp}"></GridViewColumn>
                             <GridViewColumn Header="Giá Bán" DisplayMemberBinding="{Binding GiaBan}"></GridViewColumn>
-                            <GridViewColumn Header="SL Tồn" DisplayMemberBinding="{Binding Slton}"></GridViewColumn>
+                            <GridViewColumn Header="SL Tồn" DisplayMemberBinding="{Binding SltonKho}"></GridViewColumn>
                             <GridViewColumn Header="Hình Ảnh" DisplayMemberBinding="{Binding HinhAnh}"></GridViewColumn>
                         </GridView>
                     </ListView.View>
@@ -74,7 +74,7 @@
                                     <TextBox x:Name="tbSoLuong" Width="200" VerticalAlignment="Center"></TextBox>
                                 </StackPanel>
                             </StackPanel>
-                            <Button x:Name="btnThemGioHang" Grid.Column="1" FontSize="15" FontWeight="Bold" Width="80" Height="80">
+                            <Button x:Name="btnThemGioHang" Grid.Column="1" FontSize="15" FontWeight="Bold" Width="80" Height="80" Click="btnThemGioHang_Click">
                                 <Button.Content>
                                     <TextBlock Text="Thêm Vào Giỏ Hàng" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
                                 </Button.Content>
@@ -107,7 +107,7 @@
                             <TextBox x:Name="tbTongTien" Width="220" FontSize="20" FontWeight="Bold" Foreground="Red" VerticalAlignment="Center" IsReadOnly="True"></TextBox>
                             <Label Content="VNĐ" FontSize="20" FontWeight="Bold" Foreground="Red"></Label>
                         </StackPanel>
-                        <Button x:Name="btnLapHoaDon" Content="Lập Hóa Đơn" FontSize="20" FontWeight="Bold" Foreground="Red" Width="150" Height="40" HorizontalAlignment="Right"></Button>
+                        <Button x:Name="btnLapHoaDon" Content="Lập Hóa Đơn" FontSize="20" FontWeight="Bold" Foreground="Red" Width="150" Height="40" HorizontalAlignment="Right" Click="btnLapHoaDon_Click"></Button>
                     </StackPanel>
                 </Grid>
             </Grid>

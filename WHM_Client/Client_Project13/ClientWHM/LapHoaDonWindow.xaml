@@ -21,13 +21,7 @@
         <Grid Grid.Row="1">
             <StackPanel>
                 <Label Content="Nhân Viên:" FontSize="15" FontWeight="Bold"></Label>
-                <ComboBox x:Name="cbNhanVien">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding HoTen}" FontSize="15"></TextBlock>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
+                <TextBox x:Name="tbNhanVien" IsReadOnly="True" FontSize="15"></TextBox>
                 <Label Content="Ngày Lập:" FontSize="15" FontWeight="Bold"></Label>
                 <TextBox x:Name="tbNgayLap" IsReadOnly="True" FontSize="15"></TextBox>
                 <Label Content="Tổng Tiền:" FontSize="15" FontWeight="Bold"></Label>
@@ -47,6 +41,6 @@
                 <TextBox x:Name="tbSDT" FontSize="15"></TextBox>
             </StackPanel>
         </Grid>
-        <Button x:Name="btnLapHoaDon" Grid.Row="2" Content="Lập Hóa Đơn" FontSize="15" FontWeight="Bold" Foreground="Red" Width="200" Height="30" Margin="5"></Button>
+        <Button x:Name="btnLapHoaDon" Grid.Row="2" Content="Lập Hóa Đơn" FontSize="15" FontWeight="Bold" Foreground="Red" Width="200" Height="30" Margin="5" Click="btnLapHoaDon_Click"></Button>
     </Grid>
 </Window>
