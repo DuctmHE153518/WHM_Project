@@ -84,18 +84,18 @@ public partial class WhmanagementContext : DbContext
 
         modelBuilder.Entity<Chitietxuatkho>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("CHITIETXUATKHO");
+            entity.HasKey(e => new { e.MaXuat, e.MaSp });
+
+            entity.ToTable("CHITIETXUATKHO");
 
             entity.Property(e => e.MaSp).HasColumnName("MaSP");
 
-            entity.HasOne(d => d.MaSpNavigation).WithMany()
+            entity.HasOne(d => d.MaSpNavigation).WithMany(p => p.Chitietxuatkhos)
                 .HasForeignKey(d => d.MaSp)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CHITIETXUATKHO_SANPHAM");
 
-            entity.HasOne(d => d.MaXuatNavigation).WithMany()
+            entity.HasOne(d => d.MaXuatNavigation).WithMany(p => p.Chitietxuatkhos)
                 .HasForeignKey(d => d.MaXuat)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CHITIETXUATKHO_XUATKHO");

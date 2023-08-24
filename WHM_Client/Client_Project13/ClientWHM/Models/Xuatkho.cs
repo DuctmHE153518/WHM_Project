@@ -13,5 +13,7 @@ public partial class Xuatkho
 
     public double? TongTien { get; set; }
 
+    public virtual ICollection<Chitietxuatkho> Chitietxuatkhos { get; set; } = new List<Chitietxuatkho>();
+
     public virtual Nhanvien? MaNvNavigation { get; set; }
 }
