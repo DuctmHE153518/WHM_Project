@@ -38,7 +38,7 @@ public partial class WhmanagementContext : DbContext
         var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
         IConfigurationRoot configuration = builder.Build();
-        optionsBuilder.UseSqlServer(configuration.GetConnectionString("WHManagement"));
+        optionsBuilder.UseSqlServer(configuration.GetConnectionString("WHMConStr"));
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

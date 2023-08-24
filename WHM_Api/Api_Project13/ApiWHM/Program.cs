@@ -1,4 +1,5 @@
 using ApiWHM.Models;
+using Microsoft.AspNetCore.OData;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,8 +8,14 @@ builder.Services.AddDbContext<WhmanagementContext>(
         builder.Configuration.GetConnectionString("WHMConStr"))
     );
 // Add services to the container.
-
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddOData(options => options
+        .Select()
+        .Filter()
+        .OrderBy()
+        .Expand()
+        .Count()
+        .SetMaxTop(100)
+);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
