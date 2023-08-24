@@ -21,9 +21,9 @@ public partial class Sanpham
 
     public string? HinhAnh { get; set; }
 
-    public virtual ICollection<Chitiethoadon> Chitiethoadons { get; set; } = new List<Chitiethoadon>();
+    public virtual ICollection<Chitiethoadon>? Chitiethoadons { get; set; } = new List<Chitiethoadon>();
 
-    public virtual ICollection<Chitietnhapkho> Chitietnhapkhos { get; set; } = new List<Chitietnhapkho>();
+    public virtual ICollection<Chitietnhapkho>? Chitietnhapkhos { get; set; } = new List<Chitietnhapkho>();
 
     public virtual Loaisanpham? MaLoaiSpNavigation { get; set; }
 }
