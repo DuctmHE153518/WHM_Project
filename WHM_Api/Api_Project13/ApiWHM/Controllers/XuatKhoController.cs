@@ -8,7 +8,7 @@ namespace ApiWHM.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SanPhamController : ControllerBase
+    public class XuatKhoController : ControllerBase
     {
         private WhmanagementContext _context = new WhmanagementContext();
         [HttpGet]
@@ -17,17 +17,12 @@ namespace ApiWHM.Controllers
         {
             try
             {
-                return Ok(_context.Sanphams.Include("MaLoaiSpNavigation").Select(x => new
+                return Ok(_context.Xuatkhos.Include("MaNvNavigation").Select(x => new
                 {
-                    x.MaSp,
-                    x.TenSp,
-                    x.DonVi,
-                    x.MoTa ,
-                    x.MaLoaiSp,
-                    x.GiaBan,
-                    x.Slton,
-                    x.HinhAnh,
-                    x.MaLoaiSpNavigation
+                    x.MaXuat,
+                    x.NgayXuat,
+                    x.MaNvNavigation,
+                    x.TongTien
                 }).ToList());
             }
             catch (Exception e)
@@ -41,17 +36,12 @@ namespace ApiWHM.Controllers
         {
             try
             {
-                return Ok(_context.Sanphams.Include("MaLoaiSpNavigation").Where(x => x.MaSp == id).Select(x => new
+                return Ok(_context.Xuatkhos.Include("MaNvNavigation").Where(x => x.MaXuat == id).Select(x => new
                 {
-                    x.MaSp,
-                    x.TenSp,
-                    x.DonVi,
-                    x.MoTa,
-                    x.MaLoaiSp,
-                    x.GiaBan,
-                    x.Slton,
-                    x.HinhAnh,
-                    x.MaLoaiSpNavigation
+                    x.MaXuat,
+                    x.NgayXuat,
+                    x.MaNvNavigation,
+                    x.TongTien
                 }).ToList());
             }
             catch (Exception e)
@@ -62,7 +52,7 @@ namespace ApiWHM.Controllers
 
         [HttpPost]
         [EnableQuery]
-        public IActionResult Add(Sanpham model)
+        public IActionResult Add(Xuatkho model)
         {
             try
             {
@@ -70,7 +60,7 @@ namespace ApiWHM.Controllers
                 {
                     return BadRequest(ModelState);
                 }
-                _context.Sanphams.Add(model);
+                _context.Xuatkhos.Add(model);
                 _context.SaveChanges();
                 return Ok();
             }
@@ -81,21 +71,23 @@ namespace ApiWHM.Controllers
         }
         [HttpPut("{id}")]
         [EnableQuery]
-        public IActionResult Update(int id, Sanpham model)
+        public IActionResult Update(int id, Xuatkho model)
         {
             try
             {
-                Sanpham a = _context.Sanphams.Where(a => a.MaSp == id).FirstOrDefault();
+                Xuatkho a = _context.Xuatkhos.Where(a => a.MaXuat == id).FirstOrDefault();
                 if (a == null)
                 {
                     return NotFound();
                 }
-                a.TenLoai = model.TenLoai;
+                a.MaNv = model.MaNv;
+                a.NgayXuat = model.NgayXuat;
+                a.TongTien = model.TongTien;
                 if (!ModelState.IsValid || a == null)
                 {
                     return BadRequest(ModelState);
                 }
-                _context.Sanphams.Update(a);
+                _context.Xuatkhos.Update(a);
                 _context.SaveChanges();
                 return Ok();
             }
@@ -111,8 +103,8 @@ namespace ApiWHM.Controllers
         {
             try
             {
-                Sanpham a = _context.Sanphams.Where(a => a.MaSp == id).FirstOrDefault();
-                _context.Sanphams.Remove(a);
+                Xuatkho a = _context.Xuatkhos.Where(a => a.MaXuat == id).FirstOrDefault();
+                _context.Xuatkhos.Remove(a);
                 _context.SaveChanges();
                 return Ok();
             }
