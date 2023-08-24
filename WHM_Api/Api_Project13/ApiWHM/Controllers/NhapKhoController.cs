@@ -17,12 +17,13 @@ namespace ApiWHM.Controllers
         {
             try
             {
-                return Ok(_context.Nhapkhos.Include("MaNvNavigation").Select(x => new
+                return Ok(_context.Nhapkhos.Include("MaNvNavigation").Include("Chitietnhapkhos").Select(x => new
                 {
                     x.MaNhap,
                     x.NgayNhap,
                     x.MaNvNavigation,
-                    x.TongTien
+                    x.TongTien,
+                    x.Chitietnhapkhos
                 }).ToList());
             }
             catch (Exception e)
@@ -36,12 +37,13 @@ namespace ApiWHM.Controllers
         {
             try
             {
-                return Ok(_context.Nhapkhos.Include("MaNvNavigation").Where(x => x.MaNhap == id).Select(x => new
+                return Ok(_context.Nhapkhos.Include("MaNvNavigation").Include("Chitietnhapkhos").Where(x => x.MaNhap == id).Select(x => new
                 {
                     x.MaNhap,
                     x.NgayNhap,
                     x.MaNvNavigation,
-                    x.TongTien
+                    x.TongTien,
+                    x.Chitietnhapkhos
                 }).ToList());
             }
             catch (Exception e)

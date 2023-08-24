@@ -1,4 +1,5 @@
-﻿using ApiWHM.Models;
+﻿using ApiWHM.DTO;
+using ApiWHM.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
@@ -22,7 +23,9 @@ namespace ApiWHM.Controllers
                     x.MaXuat,
                     x.NgayXuat,
                     x.MaNvNavigation,
-                    x.TongTien
+                    x.TongTien,
+                    
+
                 }).ToList());
             }
             catch (Exception e)
@@ -36,13 +39,20 @@ namespace ApiWHM.Controllers
         {
             try
             {
-                return Ok(_context.Xuatkhos.Include("MaNvNavigation").Where(x => x.MaXuat == id).Select(x => new
+                var xuatkho = _context.Xuatkhos.Include("MaNvNavigation").Where(x => x.MaXuat == id).Select(x => new
                 {
                     x.MaXuat,
                     x.NgayXuat,
                     x.MaNvNavigation,
                     x.TongTien
-                }).ToList());
+                }).FirstOrDefault();
+                XuatKhoDTO dto = new XuatKhoDTO();
+                dto.MaXuat = xuatkho.MaXuat;
+                dto.NgayXuat = xuatkho.NgayXuat;
+                dto.MaNvNavigation = xuatkho.MaNvNavigation;
+                dto.TongTien = xuatkho.TongTien;    
+                dto.Chitietxuatkhos = _context.Chitietxuatkhos.Where(a => a.MaXuat == xuatkho.MaXuat).ToList();
+                return Ok(dto);
             }
             catch (Exception e)
             {

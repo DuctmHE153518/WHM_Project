@@ -13,7 +13,7 @@ public partial class Chitietnhapkho
 
     public double? GiaNhap { get; set; }
 
-    public virtual Nhapkho MaNhapNavigation { get; set; } = null!;
+    public virtual Nhapkho? MaNhapNavigation { get; set; } = null!;
 
-    public virtual Sanpham MaSpNavigation { get; set; } = null!;
+    public virtual Sanpham? MaSpNavigation { get; set; } = null!;
 }

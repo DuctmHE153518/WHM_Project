@@ -8,7 +8,7 @@ namespace ApiWHM.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ChitietnhapkhoController : ControllerBase
+    public class ChitietxuatkhoController : ControllerBase
     {
         private WhmanagementContext _context = new WhmanagementContext();
         [HttpGet]
@@ -17,13 +17,13 @@ namespace ApiWHM.Controllers
         {
             try
             {
-                return Ok(_context.Chitietnhapkhos.Include("MaNhapNavigation").Include("MaSpNavigation").Select(x => new
+                return Ok(_context.Chitietxuatkhos.Include("MaXuatNavigation").Include("MaSpNavigation").Select(x => new
                 {
-                    x.MaNhap,
+                    x.MaXuat,
                     x.MaSp,
                     x.SoLuong,
                     x.GiaNhap,
-                    x.MaNhapNavigation,
+                    x.MaXuatNavigation,
                     x.MaSpNavigation
                 }).ToList());
             }
@@ -38,13 +38,13 @@ namespace ApiWHM.Controllers
         {
             try
             {
-                return Ok(_context.Chitietnhapkhos.Include("MaNhapNavigation").Include("MaSpNavigation").Where(x => x.MaNhap == id && x.MaSp == masp).Select(x => new
+                return Ok(_context.Chitietxuatkhos.Include("MaXuatNavigation").Include("MaSpNavigation").Where(x => x.MaXuat == id && x.MaSp == masp).Select(x => new
                 {
-                    x.MaNhap,
+                    x.MaXuat,
                     x.MaSp,
                     x.SoLuong,
                     x.GiaNhap,
-                    x.MaNhapNavigation,
+                    x.MaXuatNavigation,
                     x.MaSpNavigation
                 }).ToList());
             }
@@ -56,7 +56,7 @@ namespace ApiWHM.Controllers
 
         [HttpPost]
         [EnableQuery]
-        public IActionResult Add(List<Chitietnhapkho> model, int idNv)
+        public IActionResult Add(List<Chitietxuatkho> model, int idNv)
         {
             try
             {
@@ -64,25 +64,25 @@ namespace ApiWHM.Controllers
                 {
                     return BadRequest(ModelState);
                 }
-                Nhapkho input = new Nhapkho();
-                input.MaNhap = 0;
+                Xuatkho input = new Xuatkho();
+                input.MaXuat = 0;
                 input.MaNv = idNv;
-                input.NgayNhap = DateTime.Now;
+                input.NgayXuat = DateTime.Now;
 
-                double tongtienNhap = 0;
-                foreach (Chitietnhapkho chitietnhap in model)
+                double tongtienXuat = 0;
+                foreach (Chitietxuatkho chitietxuat in model)
                 {
-                    tongtienNhap = (double)(tongtienNhap + (chitietnhap.GiaNhap * (double)chitietnhap.SoLuong));
+                    tongtienXuat = (double)(tongtienXuat + (chitietxuat.GiaNhap * (double)chitietxuat.SoLuong));
                 }
-                input.TongTien = tongtienNhap;
-                _context.Nhapkhos.Add(input);
+                input.TongTien = tongtienXuat;
+                _context.Xuatkhos.Add(input);
                 _context.SaveChanges();
-                var latestValue = _context.Entry(input).Property(e => e.MaNhap).CurrentValue;
-                foreach (Chitietnhapkho chitietnhap in model)
+                var latestValue = _context.Entry(input).Property(e => e.MaXuat).CurrentValue;
+                foreach (Chitietxuatkho chitietxuat in model)
                 {
-                    chitietnhap.MaNhap = latestValue;
+                    chitietxuat.MaXuat = latestValue;
                 }
-                _context.Chitietnhapkhos.AddRange(model);
+                _context.Chitietxuatkhos.AddRange(model);
                 _context.SaveChanges();
                 return Ok();
             }
@@ -93,28 +93,28 @@ namespace ApiWHM.Controllers
         }
         [HttpPut("{id}")]
         [EnableQuery]
-        public IActionResult Update(int id, List<Chitietnhapkho> model)
+        public IActionResult Update(int id, List<Chitietxuatkho> model)
         {
             try
             {
-                List<Chitietnhapkho> a = _context.Chitietnhapkhos.Where(a => a.MaNhap == id).ToList();
-                Nhapkho nhapkho = _context.Nhapkhos.Where(x => x.MaNhap == id).FirstOrDefault();
-                if (a == null || a.Count == 0|| nhapkho == null)
+                List<Chitietxuatkho> a = _context.Chitietxuatkhos.Where(a => a.MaXuat == id).ToList();
+                Xuatkho xuatkho = _context.Xuatkhos.Where(x => x.MaXuat == id).FirstOrDefault();
+                if (a == null || a.Count == 0 || xuatkho == null)
                 {
                     return NotFound();
                 }
                 double tongtienNhap = 0;
-                foreach (Chitietnhapkho chitietnhap in model)
+                foreach (Chitietxuatkho chitietxuat in model)
                 {
-                    tongtienNhap = (double)(tongtienNhap + (chitietnhap.GiaNhap * (double)chitietnhap.SoLuong));
+                    tongtienNhap = (double)(tongtienNhap + (chitietxuat.GiaNhap * (double)chitietxuat.SoLuong));
                 }
-                nhapkho.TongTien = tongtienNhap;
-                _context.Nhapkhos.Update(nhapkho);
+                xuatkho.TongTien = tongtienNhap;
+                _context.Xuatkhos.Update(xuatkho);
                 _context.SaveChanges();
-                
-                foreach (Chitietnhapkho cur in a)
+
+                foreach (Chitietxuatkho cur in a)
                 {
-                    foreach (Chitietnhapkho newData in model)
+                    foreach (Chitietxuatkho newData in model)
                     {
                         if (cur.MaSp == newData.MaSp)
                         {
@@ -127,7 +127,7 @@ namespace ApiWHM.Controllers
                 {
                     return BadRequest(ModelState);
                 }
-                _context.Chitietnhapkhos.UpdateRange(a);
+                _context.Chitietxuatkhos.UpdateRange(a);
                 _context.SaveChanges();
                 return Ok();
             }
@@ -143,12 +143,12 @@ namespace ApiWHM.Controllers
         {
             try
             {
-                Chitietnhapkho a = _context.Chitietnhapkhos.Where(a => a.MaNhap == id && a.MaSp == masp).FirstOrDefault();
-                _context.Chitietnhapkhos.Remove(a);
+                Chitietxuatkho a = _context.Chitietxuatkhos.Where(a => a.MaXuat == id && a.MaSp == masp).FirstOrDefault();
+                _context.Chitietxuatkhos.Remove(a);
                 _context.SaveChanges();
-                Nhapkho nhapkho = _context.Nhapkhos.Where(x => x.MaNhap == id).FirstOrDefault();
-                nhapkho.TongTien = nhapkho.TongTien - (a.GiaNhap * (double)a.SoLuong);
-                _context.Nhapkhos.Update(nhapkho);
+                Xuatkho xuatkho = _context.Xuatkhos.Where(x => x.MaXuat == id).FirstOrDefault();
+                xuatkho.TongTien = xuatkho.TongTien - (a.GiaNhap * (double)a.SoLuong);
+                _context.Xuatkhos.Update(xuatkho);
                 _context.SaveChanges();
                 return Ok();
             }
