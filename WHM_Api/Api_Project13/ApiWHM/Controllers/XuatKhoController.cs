@@ -14,6 +14,7 @@ namespace ApiWHM.Controllers
         private WhmanagementContext _context = new WhmanagementContext();
         [HttpGet]
         [Route("List")]
+        [EnableQuery]
         public IActionResult List()
         {
             try

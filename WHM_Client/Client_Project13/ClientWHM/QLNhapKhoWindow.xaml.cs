@@ -28,5 +28,10 @@ namespace ClientWHM
         {
             this.Close();
         }
+
+        private void btnNhapHang_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
