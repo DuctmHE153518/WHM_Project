@@ -22,12 +22,14 @@ namespace ApiWHM.Controllers
         {
             return Ok(_context.Hoadons.ToList());
         }
-        [HttpGet]
+
+        [HttpGet("{dpTuNgay}/{dpDenNgay}")]
         public IActionResult Filter(DateTime dpTuNgay , DateTime dpDenNgay)
         {
             return Ok(_context.Hoadons.Where(p => p.NgayLap >= dpTuNgay && p.NgayLap <= dpDenNgay).ToList());
         }
-        [HttpGet]
+
+        [HttpGet("{dpTuNgay}/{dpDenNgay}")]
         public IActionResult DoanhThu(DateTime dpTuNgay, DateTime dpDenNgay)
         {
             double DoanhThu = 0;

@@ -44,7 +44,7 @@
                             <GridViewColumn Header="Mô Tả" DisplayMemberBinding="{Binding MoTa}"></GridViewColumn>
                             <GridViewColumn Header="Loại SP" DisplayMemberBinding="{Binding MaLoaiSpNavigation.TenLoai}"></GridViewColumn>
                             <GridViewColumn Header="Giá Bán" DisplayMemberBinding="{Binding GiaBan}"></GridViewColumn>
-                            <GridViewColumn Header="SL Tồn" DisplayMemberBinding="{Binding Slton}"></GridViewColumn>
+                            <GridViewColumn Header="SL Tồn" DisplayMemberBinding="{Binding SltonKho}"></GridViewColumn>
                             <GridViewColumn Header="Hình Ảnh" DisplayMemberBinding="{Binding HinhAnh}"></GridViewColumn>
                         </GridView>
                     </ListView.View>

@@ -70,5 +70,39 @@ namespace ClientWHM.Services
             HttpResponseMessage responseMessage = await client.PostAsync(url, content);
             return responseMessage.StatusCode;
         }
+
+        public async Task<T> Filter<T>(DateTime dpTuNgay, DateTime dpDenNgay)
+        {
+            T? result = default(T);
+            HttpClient client = new HttpClient();
+            string url = $"bill/filter/{dpTuNgay.ToString("yyyy-MM-dd")}/{dpDenNgay.ToString("yyyy-MM-dd")}";
+            HttpResponseMessage responseMessage = await client.GetAsync(_rootUrl + url);
+            if (responseMessage.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                if (responseMessage.Content is not null)
+                    result = responseMessage.Content.ReadFromJsonAsync<T>().Result;
+                return result;
+            }
+            else throw new Exception(responseMessage.StatusCode.ToString());
+
+            /*List<T> result = new List<T>();
+            string url = $"bill/filter/{dpTuNgay.ToString("yyyy-MM-dd")}/{dpDenNgay.ToString("yyyy-MM-dd")}";
+
+            using (HttpClient client = new HttpClient())
+            {
+                HttpResponseMessage response = await client.GetAsync(_rootUrl + url);
+
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    string json = await response.Content.ReadAsStringAsync();
+                    result = JsonSerializer.Deserialize<List<T>>(json);
+                }
+                else
+                {
+                    throw new Exception(response.StatusCode.ToString());
+                }
+            }
+            return result;*/
+        }
     }
 }

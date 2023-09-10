@@ -25,7 +25,7 @@
                         <MenuItem x:Name="btnLoSanPham" Header="LOẠI SẢN PHẨM" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold" Click="btnLoSanPham_Click"/>
                         <MenuItem x:Name="btnNhanVien" Header="NHÂN VIÊN" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold" Click="btnNhanVien_Click"/>
                         <MenuItem x:Name="btnNhapKho" Header="NHẬP KHO" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold" Click="btnNhapKho_Click"/>
-                        <MenuItem x:Name="btnXuatKho" Header="XUẤT KHO" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold" Click="btnXuatKho_Click"/>
+                        <!--<MenuItem x:Name="btnXuatKho" Header="XUẤT KHO" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold" Click="btnXuatKho_Click"/>-->
                         <MenuItem x:Name="btnHoaDon" Header="HÓA ĐƠN" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold" Click="btnHoaDon_Click"/>
                         <MenuItem x:Name="btnThongKe" Header="THỐNG KÊ" BorderBrush="Black" Margin="0,5,5,0" FontWeight="Bold" Click="btnThongKe_Click"/>
 

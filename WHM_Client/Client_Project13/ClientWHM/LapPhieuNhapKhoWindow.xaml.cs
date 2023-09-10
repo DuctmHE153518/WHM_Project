@@ -31,6 +31,7 @@ namespace ClientWHM
             TongTien = TT;
             GioHang = new List<Chitietnhapkho>(giohang);
             LoadData();
+            
         }
 
         private async void LoadData()

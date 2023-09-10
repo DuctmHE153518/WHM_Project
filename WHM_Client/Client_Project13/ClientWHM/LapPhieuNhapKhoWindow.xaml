@@ -21,7 +21,7 @@
         <Grid Grid.Row="1">
             <StackPanel>
                 <Label Content="Nhân Viên:" FontSize="15" FontWeight="Bold"></Label>
-                <TextBox x:Name="tbHoTen" Text="{Binding HoTen}" FontSize="15"></TextBox>
+                <TextBox x:Name="tbHoTen" FontSize="15"></TextBox>
                 <Label Content="Ngày Lập:" FontSize="15" FontWeight="Bold"></Label>
                 <TextBox x:Name="tbNgayNhap" IsReadOnly="True" FontSize="15"></TextBox>
                 <Label Content="Tổng Tiền:" FontSize="15" FontWeight="Bold"></Label>
